@@ -40,6 +40,23 @@
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
   letter-spacing: 0.5px;
   overflow: hidden;
+
+  background: linear-gradient(
+    135deg,
+    #10b981,
+    #059669
+  );
+}
+
+.tag:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+
+  background: linear-gradient(
+    135deg,
+    #059669,
+    #047857
+  );
 }
 
 .tag:hover {
