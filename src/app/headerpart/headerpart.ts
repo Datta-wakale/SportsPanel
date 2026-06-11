@@ -17,6 +17,7 @@ import { NotificationService } from '../services/notification-service';
 export class Headerpart implements OnInit {
 
   user: User | null = null;
+
   // injected
   private toastr = inject(ToastrService);
   private notificationService = inject(NotificationService);
@@ -26,19 +27,30 @@ export class Headerpart implements OnInit {
   // on component load
   ngOnInit(): void {
 
-    // Initial load
-    this.refreshUser();
+    // Observable Logic
+    this.authService.loginStatus
+      .subscribe(status => {
 
-    // Update user and show toast on every route change
+        if (status) {
+          this.user = this.authService.getUser();
+        } else {
+          this.user = null;
+        }
+
+      });
+
+    // ===== Existing Toastr Logic (unchanged) =====
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
-        this.refreshUser();
+
         // Check if there's a toast to display
         const toast = this.notificationService.toastData;
-        // check toast is there or not
+
         if (toast) {
+
           switch (toast.type) {
+
             case 'success':
               this.toastr.success(toast.message, toast.title);
               break;
@@ -54,31 +66,30 @@ export class Headerpart implements OnInit {
             case 'info':
               this.toastr.info(toast.message, toast.title);
               break;
-            
-          }
-          //  dont repeat toast when refresh
-          this.notificationService.clearToast();
-        }
-      });
-  }
 
-  refreshUser(): void {
-    this.user = this.authService.getUser();
+          }
+
+          // dont repeat toast when refresh
+          this.notificationService.clearToast();
+
+        }
+
+      });
+
   }
 
   logout(): void {
+
     this.authService.logout();
 
-    // Optional: show logout toast
+    //  show logout toast
     this.notificationService.setToast(
       'info',
       'Logged Out',
       'You have been logged out successfully'
     );
 
-    this.refreshUser();
     this.router.navigate(['/home']);
-    
-  }
 
+  }
 }

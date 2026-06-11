@@ -13,14 +13,14 @@
   @for (step of steps; track $index) {
     <div
       class="step"
-      [class.active]="bookingService.currentStep >= ($index + 1)">
+      [class.active]="currentStep >= ($index + 1)">
       {{ $index + 1 }}. {{ step }}
     </div>
   }
 </div>
 <div class="nav-buttons">
 
-  @if(bookingService.currentStep > 1){
+  @if(currentStep > 1){
     <button class="back-btn" (click)="prevStep()">
       ← Previous
     </button>
@@ -28,7 +28,7 @@
 
 </div>
 <div class="booking-content">
-  @switch (bookingService.currentStep) {
+  @switch (currentStep) {
     @case (1) {
       <app-sport-selection />
     }

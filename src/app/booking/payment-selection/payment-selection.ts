@@ -64,8 +64,7 @@ export class PaymentSelection {
     // when booking confirmed msg
     this.toastrService.success("Payment successfull", "Transaction");
     this.router.navigate(['/mybookings']);
-    this.bookingService.currentStep = 1;
-  
+    this.bookingService.setStep(1);
   }
   
 }

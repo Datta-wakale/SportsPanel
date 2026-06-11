@@ -21,6 +21,6 @@ export class VenueSelection {
 
   selectVenue(venue: any): void {
     this.bookingService.selectedVenue = venue;
-    this.bookingService.currentStep = 3;
+    this.bookingService.setStep(3);
   }
 }

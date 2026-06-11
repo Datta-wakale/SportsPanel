@@ -57,12 +57,6 @@ export class LoginComponent implements OnInit {
       this.notificationService.setToast('success',
         'Login Successful',
         'Welcome back to the portal!');
-      // Trigger success toast
- /*      this.toastr.success('Welcome back to the portal!', 'Login Successful')
-      // Wait for 2 seconds
-        // setTimeout(() => {
-         
-        // }, 2000); */
         this.router.navigate(['/booking']);
     } else {
       // Trigger error toast for invalid inputs

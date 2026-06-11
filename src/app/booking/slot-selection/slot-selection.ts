@@ -63,7 +63,7 @@ export class SlotSelection {
       to: this.toTime
     };
 
-    this.bookingService.currentStep = 4;
+    this.bookingService.setStep(4);
 
     this.showSuccess('Slot Selected Successfully');
   }
