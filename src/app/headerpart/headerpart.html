@@ -1,0 +1,38 @@
+<header class="header">
+
+  <!-- LOGO -->
+  <div class="logo">
+    <a href="#">SportZone</a>
+  </div>
+
+  <!-- MENU -->
+  <nav>
+    <ul class="left-sidebar-menu">
+      <li><a routerLink="/home">Home</a></li>
+      <li><a routerLink="/listofsports">Sports</a></li>
+      <li><a routerLink="/aboutus">About us</a></li>
+      <li><a routerLink="/events">Events</a></li>
+      <li><a routerLink="/contact">Contact us</a></li>
+      @if(user){
+     <li>
+         <a routerLink="/mybookings">My Bookings</a>
+    </li>
+      }
+    </ul>
+  </nav>
+  <!-- BUTTONS -->
+  <div class="right-sidebar">
+    @if (!user) {
+      <button class="sidebar-button register-btn"  routerLink="/register">
+        Register
+      </button>
+       <button class="sidebar-button login-btn" routerLink="/login"> Login </button>
+    }
+
+    @if (user) {
+      <button class="sidebar-button logout-btn" (click)="logout()"> Logout </button>
+     
+    }
+  
+  </div>
+</header>

@@ -1,0 +1,37 @@
+<h2>Select Date & Time Slot</h2>
+<div class="slot-container">
+
+  <div class="field">
+    <label>Select Date</label>
+    <input type="date"
+           [min]="selectedDate"
+           [value]="selectedDate"
+           (change)="setDate($event)" />
+  </div>
+
+  <div class="field">
+    <label>From Time</label>
+    <input type="time" (change)="setFromTime($event)" />
+  </div>
+
+  <div class="field">
+    <label>To Time</label>
+    <input type="time" (change)="setToTime($event)" />
+  </div>
+  
+
+</div>
+
+<div class="actions">
+  <button class="confirm-btn" (click)="confirmSlot()"> Confirm Slot </button>
+</div>
+
+  <!-- POPUP   -->
+@if (showPopup) {
+<div class="popup-wrapper">
+  <div class="popup-card">
+    <h3 [class]="popupType"> {{ popupMessage }} </h3>
+    <button type="button" (click)="closePopup()"> OK </button>
+  </div>
+</div>
+} 

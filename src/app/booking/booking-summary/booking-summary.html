@@ -1,0 +1,33 @@
+
+<h2>Booking Summary</h2>
+
+<div class="summary-card">
+
+    <p>
+        Sport :
+        {{bookingService.selectedSport.name}}
+    </p>
+
+    <p>
+        Venue :
+        {{bookingService.selectedVenue.name}}
+    </p>
+
+    <p>
+        Slot :
+        {{bookingService.selectedSlot.from}}
+        -
+        {{bookingService.selectedSlot.to}}
+    </p>
+
+    <p>
+        Amount :
+        ₹{{bookingService.selectedVenue.price}}
+    </p>
+
+    <button
+        (click)="bookingService.currentStep = 5">
+        Proceed To Payment
+    </button>
+
+</div>

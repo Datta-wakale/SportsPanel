@@ -1,0 +1,43 @@
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; 
+  box-sizing: border-box;
+  background: #f3f4f6;
+}
+
+.summary-card {
+  width: 100%;
+  max-width: 360px;  
+  background: white;
+  border-radius: 10px; 
+  padding: 16px;      
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.summary-card p {
+  margin-bottom: 10px;  /* reduced */
+  font-size: 15px;      
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.summary-card button {
+  width: 100%;
+  padding: 8px;          /* reduced height */
+  border: none;
+  border-radius: 7px;
+  background: #16a34a;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.summary-card button:hover {
+  background: #15803d;
+}

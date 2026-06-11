@@ -1,0 +1,11 @@
+<h2>Select Sport</h2>
+<div class="grid">
+  @for (sport of sports; track sport.id) {
+    <div
+      class="card"
+      (click)="selectSport(sport)">
+      <img [src]="sport.image" [alt]="sport.name">
+      <h3>{{ sport.name }}</h3>
+    </div>
+  }
+</div>

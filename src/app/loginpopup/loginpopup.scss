@@ -1,0 +1,79 @@
+/* .dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+
+  .status-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.message {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+/* Success state */
+/*
+.success-text {
+  color: #2e7d32; 
+}
+
+.status-icon[color='primary'] {
+  color: #4caf50; 
+}
+
+.error-text {
+  color: #d32f2f; 
+}
+
+.status-icon[color='warn'] {
+  color: #f44336; // Red
+} */
+
+ .full-width {
+  width: 100%;
+}
+ 
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  overflow: auto;
+} 
+.full-width {
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.otp-box {
+  background: #e8f5e9;
+  border: 1px solid #81c784;
+  color: #2e7d32;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 16px;
+}

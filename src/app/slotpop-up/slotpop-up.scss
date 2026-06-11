@@ -1,0 +1,24 @@
+.dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.message {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.success-text {
+  color: green;
+}
+
+.error-text {
+  color: red;
+}

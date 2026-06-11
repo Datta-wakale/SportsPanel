@@ -1,0 +1,40 @@
+<h2 mat-dialog-title class="dialog-title">
+
+  <mat-icon
+    [color]="data.success ? 'primary' : 'warn'"
+    class="status-icon">
+
+    {{ data.success ? 'check_circle' : 'error' }}
+
+  </mat-icon>
+
+  {{ data.success ? 'Success' : 'Oops!' }}
+
+</h2>
+
+<mat-dialog-content>
+
+  <p
+    class="message"
+    [class.success-text]="data.success"
+    [class.error-text]="!data.success">
+
+    {{ data.message }}
+
+  </p>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-flat-button
+    [color]="data.success ? 'primary' : 'warn'"
+    (click)="closePopUp()">
+
+    <mat-icon>close</mat-icon>
+    Close
+
+  </button>
+
+</mat-dialog-actions>

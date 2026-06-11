@@ -1,0 +1,71 @@
+<div class="help-container">
+
+    <div class="header">
+
+        <h2>Help Center</h2>
+
+        <button class="close-btn" (click)="close()">
+            ✕
+        </button>
+
+    </div>
+
+    <p class="subtitle">
+        How can we help you today?
+    </p>
+
+    <div class="search-box">
+
+        <mat-form-field appearance="outline">
+
+            <mat-label>
+                Enter your question
+            </mat-label>
+
+            <input matInput [(ngModel)]="query" placeholder="Example: My payment failed">
+
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="sendQuery()">
+
+            Send
+
+        </button>
+
+    </div>
+ <div class="quick-help">
+  <h3>Frequently Asked Questions</h3>
+
+  @for (faq of faqs; track $index) {
+    <div class="faq-card">
+      <p class="faq-question" (click)="toggleFaq($index)">
+        {{ faq.question }}
+      </p>
+
+      @if (openFaq === $index) {
+        <div class="faq-answer">
+          {{ faq.answer }}
+        </div>
+      }
+    </div>
+  }
+</div>
+
+    <div class="contact-section">
+
+        <h3>Contact Support</h3>
+
+        <div class="contact-card">
+           <p>+91 8766948714</p> 
+        </div>
+
+        <div class="contact-card">
+            Email:  <a href="mailto:support@sportszone.com">support@sportszone.com</a>
+        </div>
+        <div class="contact-card">
+           <p>Mon - Sun | 8:00 AM - 10:00 PM</p> 
+        </div>
+    
+    </div>
+
+</div>

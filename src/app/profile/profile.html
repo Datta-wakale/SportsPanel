@@ -1,0 +1,64 @@
+<div class="profile-container">
+
+  <!-- Welcome Section -->
+  <div class="welcome-card">
+    <h1>
+      Welcome,
+      {{ user?.name || user?.email }}
+    </h1>
+
+    <p>
+      Track your sports journey and manage your bookings.
+    </p>
+  </div>
+
+  <!-- Statistics Section -->
+  <div class="stats-section">
+
+    <div class="stat-card">
+      <h2>{{ totalBookings }}</h2>
+      <p>Total Bookings</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ favoriteSport }}</h2>
+      <p>Favorite Sport</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>
+        {{ sports.filter(s => s.bookings > 0).length }}
+      </h2>
+      <p>Active Sports</p>
+    </div>
+
+  </div>
+
+  <!-- Sports Cards -->
+  <div class="sports-section">
+
+    @for (sport of sports; track sport.name) {
+
+      <div class="sport-card">
+
+        <h2>{{ sport.name }}</h2>
+
+        <div class="count">
+          {{ sport.bookings }}
+        </div>
+
+        <p>No. of Bookings</p>
+
+        <button
+          class="booking-btn"
+          (click)="goToBookings()">
+          View Bookings
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

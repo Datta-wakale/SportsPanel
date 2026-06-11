@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>My Bookings</h1>
+
+  <h2>Upcoming Bookings</h2>
+
+  <div class="booking-grid">
+    @if(upcomingBookings.length){
+      @for(booking of upcomingBookings; track booking.id){
+        <div class="booking-card">
+          <h3>{{booking.sportName}}</h3>
+          <p>Venue: {{booking.venueName}}</p>
+          <p>Date: {{booking.date}}</p>
+          <p>Time: {{booking.fromTime}} - {{booking.toTime}}</p>
+          <p>Amount: ₹{{booking.amount}}</p>
+
+          <button
+            class="cancel-btn"
+            (click)="cancelBooking(booking.id)">
+            Cancel Booking
+          </button>
+        </div>
+      }
+    }
+  </div>
+
+  <h2>Booking History</h2>
+
+  <div class="booking-grid">
+    @if(historyBookings.length){
+      @for(booking of historyBookings; track booking.id){
+        <div class="booking-card">
+          <h3>{{booking.sportName}}</h3>
+          <p>Venue: {{booking.venueName}}</p>
+          <p>Status: {{booking.status}}</p>
+          <p>Date: {{booking.date}}</p>
+        </div>
+      }
+    }
+  </div>
+  <button id="backbtn" type="button" routerLink="/home">BackToHome</button>
+</div>

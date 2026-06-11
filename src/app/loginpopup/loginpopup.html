@@ -1,0 +1,77 @@
+<h2>Forgot Password</h2>
+
+<form [formGroup]="form">
+
+  <!-- STEP 1 -->
+  @if (step === 1) {
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+
+      <input
+        matInput
+        formControlName="email"
+        type="email" />
+    </mat-form-field>
+  }
+
+  <!-- STEP 2 -->
+  @if (step === 2) {
+
+    <div class="otp-box">
+      Demo OTP :
+      <strong>{{ generatedOtp }}</strong>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Enter OTP</mat-label>
+
+      <input
+        matInput
+        formControlName="otp" />
+    </mat-form-field>
+
+  }
+
+  <!-- STEP 3 -->
+  @if (step === 3) {
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>New Password</mat-label>
+
+      <input
+        matInput
+        type="password"
+        formControlName="password" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Confirm Password</mat-label>
+
+      <input
+        matInput
+        type="password"
+        formControlName="confirmPassword" />
+    </mat-form-field>
+
+  }
+
+  <div class="actions">
+
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="close()">
+      Cancel
+    </button>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="next()">
+      {{ step === 3 ? 'Reset Password' : 'Next' }}
+    </button>
+
+  </div>
+</form>
+

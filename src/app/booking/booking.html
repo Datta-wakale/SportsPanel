@@ -1,0 +1,52 @@
+<div class="booking-page">
+    <div class="booking-header">
+        <h1>Sports Venue Booking</h1>
+        <p>Book your favorite sport venue in a few simple steps</p>
+        <!-- USER SECTION -->
+        @if(user) {
+        <div class="user-bar">
+            <span> Welcome, {{ user.name || user.email }}</span>
+        </div>
+        }
+    </div>
+<div class="stepper">
+  @for (step of steps; track $index) {
+    <div
+      class="step"
+      [class.active]="bookingService.currentStep >= ($index + 1)">
+      {{ $index + 1 }}. {{ step }}
+    </div>
+  }
+</div>
+<div class="nav-buttons">
+
+  @if(bookingService.currentStep > 1){
+    <button class="back-btn" (click)="prevStep()">
+      ← Previous
+    </button>
+  }
+
+</div>
+<div class="booking-content">
+  @switch (bookingService.currentStep) {
+    @case (1) {
+      <app-sport-selection />
+    }
+    @case (2) {
+      <app-venue-selection />
+    }
+    @case (3) {
+      <app-slot-selection />
+    }
+    @case (4) {
+      <app-booking-summary />
+    }
+    @case (5) {
+      <app-payment-selection />
+    }
+    @default {
+      <app-sport-selection />
+    }
+  }
+</div>
+ <button id="backbtn" type="button" routerLink="/home">BackToHome</button>

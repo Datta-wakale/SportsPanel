@@ -1,0 +1,170 @@
+/* REGISTER PAGE WRAPPER */
+.register-page-bg {
+  width: 100%;
+//   min-height: calc(100vh - 80px); /* 80px header height */
+  padding: 90px 20px 20px; /* top padding for header + bottom spacing */
+  box-sizing: border-box;
+height: 560px;
+  background-image: url("./registerbackimage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* REGISTER CARD */
+.register-card {
+  width: 100%;
+ position: absolute;
+ top: 14%;
+  max-width: 350px; /* reduced from 380px */
+  border-radius: 12px;
+  padding: 15px; /* slightly smaller padding */
+  margin: 0 auto; /* center horizontally */
+
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 12px 25px rgba(0, 0, 0, 0.25),
+    0 0 15px rgba(37, 99, 235, 0.15);
+}
+
+/* FORM */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* reduced gap */
+}
+
+/* TITLE */
+.register-form h2 {
+  text-align: center;
+  color: #000;
+  font-size: 20px; /* slightly smaller */
+  margin-bottom: 6px;
+}
+
+/* INPUT GROUP */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  color: #000;
+  font-size: 14px; /* smaller */
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.input-group input {
+  width: 100%;
+  height: 34px; /* smaller height */
+  padding: 0 10px;
+
+  border-radius: 6px; /* slightly smaller radius */
+  border: 1px solid #4b5563;
+
+  color: #000;
+  outline: none;
+
+  transition: 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.4);
+}
+
+/* ERROR TEXT */
+.error-text {
+  min-height: 14px;
+  margin-top: 2px;
+  color: #ff6b6b;
+  font-size: 12px; 
+}
+
+/* BUTTONS */
+.register-submit-btn,
+.home-btn {
+  width: 100%;
+  height: 36px; 
+  border: none;
+  border-radius: 6px; 
+  font-size: 13px; 
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+.register-submit-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.register-submit-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.register-submit-btn:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}
+.home-btn {
+  background: #16a34a;
+  color: white;
+}
+
+.home-btn:hover {
+  background: #15803d;
+}
+
+/* POPUP */
+.popup-wrapper {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.popup-card {
+  width: 260px; 
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+.popup-card h3 {
+  margin-bottom: 10px;
+  font-size: 14px; 
+}
+
+.success {
+  color: #16a34a;
+}
+
+.error {
+  color: #dc2626;
+}
+.popup-card button {
+  width: 100%;
+  height: 36px; /* smaller */
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.popup-card button:hover {
+  background: #1d4ed8;
+}

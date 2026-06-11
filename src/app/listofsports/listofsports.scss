@@ -1,0 +1,111 @@
+.selection-wrapper {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  padding: 100px 20px 40px;
+  background: #d6dde3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.section-title {
+  margin-top: 60px;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  max-width: 900px;
+}
+
+.tag {
+  padding: 14px 26px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.5px;
+  overflow: hidden;
+}
+
+.tag:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+}
+.search-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.search-bar input {
+  width: 320px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 25px;
+  outline: none;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
+.search-bar button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: .3s;
+}
+#backbtn{
+  margin-top: 18px;
+  outline: none;
+  border: none;
+  background: #000;
+  color: white;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+}
+.search-bar button:hover {
+  background: #1d4ed8;
+}
+/* Colors */
+.football {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.cricket {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.badminton {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.tennis {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.basketball {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.turf {
+  background: linear-gradient(135deg, #10b981, #059669);
+}

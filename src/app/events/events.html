@@ -1,0 +1,36 @@
+<div class="events-page">
+  <h1 class="page-title">Sports Events</h1>
+  <!-- IMAGE SLIDER -->
+  <div class="slider-container">
+
+    <button class="nav-btn left"
+            (click)="prevSlide()">
+      ❮
+    </button>
+    <img [src]="images[currentIndex]" class="slider-image" alt="Event Image">
+    <button class="nav-btn right"    (click)="nextSlide()">
+      ❯</button>
+  </div>
+  <!-- EVENT CARDS -->
+  <div class="events-grid">
+    @for(event of upcomingEvents; track event.title){
+    <div class="event-card">
+      <h2>{{event.title}}</h2>
+      <p> <strong>Date:</strong>
+        {{event.date}}
+      </p>
+      <p>
+        <strong>Location:</strong>
+        {{event.location}}
+      </p>
+      <p>
+        {{event.description}}
+      </p>
+      <button class="register-btn" [disabled]="!isLogin" (click)="eventRegisteration(event)">
+        Register Now
+</button>
+</div>
+    }
+  </div>
+   <button id="backbtn" type="button" routerLink="/home">BackToHome</button>
+</div>

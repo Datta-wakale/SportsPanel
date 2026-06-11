@@ -1,0 +1,113 @@
+.booking-page {
+     padding: 65px 20px 15px;
+    background: #f4f7fb;
+}
+.booking-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.booking-header h1 {
+    font-size: 38px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+.booking-header p {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.stepper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.step {
+    padding: 12px 24px;
+    border-radius: 30px;
+    background: #e5e7eb;
+    color: #374151;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    background: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.booking-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.user-bar {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  position: absolute;
+  top:80px;
+  right: 46%;
+  color: #137d9f;
+}
+
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.logout-btn:hover {
+  background: #dc2626;
+}
+.nav-buttons {
+    position: absolute;
+    top: 100px;
+}
+
+.back-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #6b7280;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.9s;
+}
+
+.back-btn:hover {
+  background: #4b5563;
+  color: #e5e7eb;
+}
+#backbtn{
+  margin-top: 14px;
+  outline: none;
+  border: none;
+  background: #000;
+  color: white;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  position: absolute;
+  top: 88px;
+  right: 60px;
+}

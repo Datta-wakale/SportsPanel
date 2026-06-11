@@ -1,0 +1,86 @@
+<h2 mat-dialog-title align="center">{{ data.method }}</h2>
+
+<mat-dialog-content align="center">
+
+  @if(data.method === 'UPI') {
+
+    <h3>Scan QR Code to Pay</h3>
+
+    <qrcode [qrdata]="upiData" [width]="200"></qrcode>
+
+    <p class="amount">
+      Amount: ₹{{ data.amount }}
+    </p>
+
+  }
+
+  @else if(data.method === 'Net Banking') {
+
+    <mat-form-field appearance="outline">
+      <mat-label>Account Holder Name</mat-label>
+      <input matInput [(ngModel)]="accountHolder">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Account Number</mat-label>
+      <input matInput [(ngModel)]="accountNumber">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>IFSC Code</mat-label>
+      <input matInput [(ngModel)]="ifsc">
+    </mat-form-field>
+
+  }
+
+  @else {
+
+    <mat-form-field appearance="outline">
+      <mat-label>Card Holder Name</mat-label>
+      <input matInput [(ngModel)]="cardHolderName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Card Number</mat-label>
+      <input matInput maxlength="16"
+             [(ngModel)]="cardNumber">
+    </mat-form-field>
+
+    <div class="card-row">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Expiry</mat-label>
+        <input matInput placeholder="MM/YY"
+               [(ngModel)]="expiry">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>CVV</mat-label>
+        <input matInput type="password"
+               maxlength="3"
+               [(ngModel)]="cvv">
+      </mat-form-field>
+
+    </div>
+
+  }
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button mat-stroked-button  (click)="cancel()">
+    Cancel
+  </button>
+
+  <button mat-raised-button color="primary"
+          (click)="submitPayment()">
+
+    @if(data.method === 'UPI') {
+      Payment Done
+    } @else {
+      Pay ₹{{ data.amount }}
+    }
+
+  </button>
+</mat-dialog-actions>

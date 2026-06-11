@@ -1,0 +1,117 @@
+<div class="payment-container">
+
+  <h2>Select Payment Method</h2>
+
+  <div class="payment-grid">
+    @for (payment of payments; track payment) {
+      <button (click)="pay(payment)">
+        {{ payment }}
+      </button>
+    }
+  </div>
+
+</div>
+
+<div class="note">
+  <p id="info">
+    Note* If money deducted from your account and slot is not booked,
+    please let us know. We will try to resolve your issue as soon as possible.
+  </p>
+
+  <p>
+    <a routerLink="/contact">Share payment details</a>
+  </p>
+</div>
+
+
+
+
+<!--  <div class="payment-container">
+
+  <h2>Select Payment Method</h2>
+
+  <div class="payment-grid">
+    @for(payment of payments; track payment){
+    <button
+      (click)="pay(payment)">
+      {{ payment }}
+    </button>
+ }
+  </div>
+
+</div>
+
+@if(showQr){
+<div class="overlay">
+  <div class="popup">
+
+    <h3>Scan QR Code to Pay</h3>
+
+    <img src="images/fakeqrimage.png" class="qr-image">
+
+    <p class="amount">
+      Amount: ₹{{ bookingService.selectedVenue.price }}
+    </p>
+
+    <div class="popup-buttons">
+
+      <button
+        class="success-btn"
+        (click)="confirmBooking('UPI')">
+        Payment Done
+      </button>
+
+      <button
+        class="close-btn"
+        (click)="showQr=false">
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+</div>
+}
+
+ @if(showCardPopup){
+<div class="overlay">
+  <div class="popup">
+    <h3>{{ selectedMethod }}</h3>
+    @if(selectedMethod === 'Net Banking'){
+
+      <input placeholder="Account Holder Name" [(ngModel)]="accountHolder">
+      <input placeholder="Account Number" [(ngModel)]="accountNumber">
+      <input placeholder="IFSC Code" [(ngModel)]="ifsc">
+
+    }
+    @else {
+      <input placeholder="Card Holder Name" [(ngModel)]="cardHolderName">
+      <input maxlength="16" placeholder="Card Number" [(ngModel)]="cardNumber">
+      <input placeholder="Expiry (MM/YY)" [(ngModel)]="expiry">
+      <input maxlength="3" placeholder="CVV" [(ngModel)]="cvv">
+
+    }
+    <div class="popup-buttons">
+      <button class="success-btn" (click)="submitPayment()">
+        Pay ₹{{ bookingService.selectedVenue.price }}
+      </button>
+      <button class="close-btn" (click)="showCardPopup=false">  Cancel </button>
+    </div>
+  </div>
+</div>
+} 
+<div class="note">
+  <p id="info">Note* If money deducted from your account and slot is not booked please let us know we will try to resolve your issue as soon as possible</p>
+  <p><a routerLink="/contact">share payment details</a></p>
+</div>
+ -->
+
+
+<!-- <h2>Demo Of anugular material pop up</h2>
+<div class="payment-grid">
+  @for (payment of payments; track payment) {
+    <button (click)="pay(payment)">
+      {{ payment }}
+    </button>
+  }
+</div> -->

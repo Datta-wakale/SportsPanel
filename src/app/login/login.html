@@ -1,0 +1,46 @@
+<div class="login-page-bg">
+    <div class="login-card">
+        <form [formGroup]="loginForm"
+              class="login-form"
+              (ngSubmit)="onLogin()">
+            <h2>Login</h2>
+            <div class="input-group">
+                <label>Email</label>
+
+                <input type="email"
+                       formControlName="email"
+                       placeholder="Enter Email" />
+
+                <span class="error-text">
+                    @if(loginForm.get('email')?.invalid &&
+                        loginForm.get('email')?.touched) {
+                        Valid Email is Required
+                    }
+                </span>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password"
+                       formControlName="password"
+                       placeholder="Enter Password" />
+                <span class="error-text">
+                    @if(loginForm.get('password')?.invalid &&
+                        loginForm.get('password')?.touched) {
+                        Password is Required
+                    }
+                </span>
+            </div>
+            <button class="login-submit-btn"
+                    type="submit"
+                    [disabled]="loginForm.invalid">  Login  </button>
+
+            <button class="home-btn" type="button"  routerLink="/home" >
+                Back To Home
+            </button>
+             <a id="forgetpass" (click)="openForgotPassword()">Forget password?</a> 
+        </form>
+    </div>
+</div>
+
+
