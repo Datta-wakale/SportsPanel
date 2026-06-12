@@ -57,7 +57,7 @@ export class ListOfSportsComponent implements OnInit {
               venue.sportId === selectedSport.id
           );
         }
-        
+
         else {
           this.filteredVenues = [];
         }

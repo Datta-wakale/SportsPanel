@@ -1,61 +1,33 @@
 <div class="selection-wrapper">
 
   <h2 class="title">Choose Your Sport</h2>
-
   <div class="search-bar">
-
     <input
       type="text"
       placeholder="Search Sport..."
-      [formControl]="searchControl">
-
+      [formControl]="searchControl" />
   </div>
 
   <div class="tags-container">
-
     @for (sport of filteredSports; track sport.id) {
-
-      <a
-        class="tag"
+      <a class="tag"
         routerLink="/booking">
-
         {{ sport.name }}
-
       </a>
-
     }
 
   </div>
-
   <h2 class="title section-title">
-
     Choose Your Venue
-
   </h2>
-
   <div class="tags-container">
-
     @for (venue of filteredVenues; track venue.id) {
-
-      <a
-        class="tag"
+      <a class="tag"
         routerLink="/booking">
-
         {{ venue.name }}
-
       </a>
 
     }
-
   </div>
-
-  <button
-    id="backbtn"
-    type="button"
-    routerLink="/home">
-
-    BackToHome
-
-  </button>
-
+  <button id="backbtn" type="button" routerLink="/home"> BackToHome </button>
 </div>
