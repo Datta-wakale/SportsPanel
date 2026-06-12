@@ -15,13 +15,11 @@ export class Auth {
     const data = localStorage.getItem(this.storageKey);
     return data ? JSON.parse(data) : null;
   }
-
   // LOGIN
   login(user: User): void {
     localStorage.setItem(this.storageKey, JSON.stringify(user));
     this.loginStatusSubject.next(true); // Update login status
   }
-
   // LOGOUT
   logout(): void {
     localStorage.removeItem(this.storageKey);

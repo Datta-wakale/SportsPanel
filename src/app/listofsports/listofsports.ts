@@ -24,10 +24,10 @@ export class ListOfSportsComponent implements OnInit {
   ngOnInit(): void {
     // Listen to search input changes
     this.searchControl.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged()
-      )
+       /* .pipe(
+         debounceTime(300),
+        distinctUntilChanged() 
+      )  */
       // Subscribe to search input changes
       .subscribe(value => {
         const searchValue = value?.toLowerCase().trim() || '';
@@ -57,7 +57,6 @@ export class ListOfSportsComponent implements OnInit {
               venue.sportId === selectedSport.id
           );
         }
-        
         else {
           this.filteredVenues = [];
         }

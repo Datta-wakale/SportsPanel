@@ -3,23 +3,20 @@
   <!-- Welcome Section -->
   <div class="welcome-card">
     <h1>
+      <i class="fa-solid fa-user"></i>
       Welcome,
       {{ user?.name || user?.email }}
     </h1>
-
     <p>
       Track your sports journey and manage your bookings.
     </p>
   </div>
-
   <!-- Statistics Section -->
   <div class="stats-section">
-
     <div class="stat-card">
       <h2>{{ totalBookings }}</h2>
       <p>Total Bookings</p>
     </div>
-
     <div class="stat-card">
       <h2>{{ favoriteSport }}</h2>
       <p>Favorite Sport</p>
@@ -33,32 +30,54 @@
     </div>
 
   </div>
-
-  <!-- Sports Cards -->
-  <div class="sports-section">
-
-    @for (sport of sports; track sport.name) {
-
-      <div class="sport-card">
-
-        <h2>{{ sport.name }}</h2>
-
-        <div class="count">
-          {{ sport.bookings }}
-        </div>
-
-        <p>No. of Bookings</p>
-
-        <button
-          class="booking-btn"
-          (click)="goToBookings()">
-          View Bookings
-        </button>
-
+  <!-- Achievements -->
+<div class="achievements-section">
+  <h2>
+    <i class="fa-solid fa-trophy"></i>
+    Achievements
+  </h2>
+  <div class="badges-container">
+    @if(totalBookings >= 5){
+      <div class="badge-card bronze">
+        <i class="fa-solid fa-medal"></i>
+        <span>Booking Enthusiast</span>
       </div>
+    }
+    @if(totalBookings >= 10){
+      <div class="badge-card silver">
+        <i class="fa-solid fa-star"></i>
+        <span>Regular Player</span>
+      </div>
+    }
+    @if(totalBookings >= 25){
+      <div class="badge-card gold">
+        <i class="fa-solid fa-crown"></i>
+        <span>Champion</span>
+      </div>
+    }
 
+    @if(sports.filter(s => s.bookings > 0).length >= 3){
+      <div class="badge-card multi">
+        <i class="fa-solid fa-fire"></i>
+        <span>Multi-Sport Player</span>
+      </div>
     }
 
   </div>
+</div>
 
+  <!-- Sports Cards -->
+  <div class="sports-section">
+    @for (sport of sports; track sport.name) {
+      <div class="sport-card">
+        <h2>{{ sport.name }}</h2>
+        <div class="count">
+          {{ sport.bookings }}
+        </div>
+        <p>No. of Bookings</p>
+        <button class="booking-btn" (click)="goToBookings()"> View Bookings </button>
+      </div>
+    }
+  </div>
+   <button id="backbtn" type="button" routerLink="/home">BackToHome</button>
 </div>

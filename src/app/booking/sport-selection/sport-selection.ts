@@ -10,10 +10,11 @@ import { BookingService } from '../../services/booking.service';
   styleUrl: './sport-selection.scss'
 })
 export class SportSelection {
+  // data for sports
   sports = SPORTS;
-
+  // inject booking service
   constructor(private bookingService: BookingService) {}
-
+  // select sport and move to next step
   selectSport(sport: any): void {
     this.bookingService.selectedSport = sport;
     this.bookingService.setStep(2);
