@@ -1,47 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })
 export class ProfileComponent implements OnInit {
-
+  // inject router
+   constructor(private router: Router) {}
+  // user data
   user: any = null;
-
+  // data for bookings summary
   totalBookings = 0;
-  favoriteSport = 'No Bookings Yet';
-
+  favoriteSport = 'No Favorite Sport Yet';
+  // data for sports summary
   sports = [
     { name: 'Cricket', bookings: 0 },
     { name: 'Football', bookings: 0 },
     { name: 'Badminton', bookings: 0 },
     { name: 'Turf', bookings: 0 }
   ];
-
-  constructor(private router: Router) {}
-
+  // on component load
   ngOnInit(): void {
-
-    this.user = JSON.parse(
-      localStorage.getItem('loggedInUser') || '{}'
-    );
-
-    const allBookings = JSON.parse(
-      localStorage.getItem('bookings') || '[]'
-    );
-
+    // get loggedInUser from localStorage
+    this.user = JSON.parse( localStorage.getItem('loggedInUser') || '{}' );
+    const allBookings = JSON.parse( localStorage.getItem('bookings') || '[]' );
+    // filter bookings for that user
     const userBookings = allBookings.filter(
+      // filter the booking for that user
       (booking: any) =>
         booking.userEmail === this.user.email
     );
-
+    // total bookings
     this.totalBookings = userBookings.length;
-
+    // calculate favorite sport
     this.sports.forEach(sport => {
       sport.bookings = userBookings.filter(
         (booking: any) =>
@@ -49,19 +44,16 @@ export class ProfileComponent implements OnInit {
           sport.name.trim().toLowerCase()
       ).length;
     });
-
+    // find sport with max bookings
     const maxSport = this.sports.reduce((a, b) =>
       a.bookings > b.bookings ? a : b
     );
-
-    this.favoriteSport =
-      maxSport.bookings > 0
-        ? maxSport.name
-        : 'No Bookings Yet';
+    // if max bookings is 0 then show no bookings yet
+    this.favoriteSport = maxSport.bookings > 0 ? maxSport.name : 'No Favorite Sport Yet';
   }
-
-  goToBookings(): void {
-    this.router.navigate(['/mybookings']);
+  // navigate to mybookings page
+  goToBookings(): void{
+     this.router.navigate(['/mybookings']);
   }
 
 }

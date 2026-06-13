@@ -51,5 +51,11 @@
 .explore-btn:hover{
     background: darkorange;
 }
-
+.hero-wrapper{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height:100%;
+    padding:0 80px;
+}
 

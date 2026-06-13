@@ -30,9 +30,45 @@
     }
 
     @if (user) {
-      <button class="sidebar-button logout-btn" (click)="logout()"> Logout </button>
-     
+
+  <div class="user-menu">
+
+    <button class="user-icon-btn" (click)="toggleDropdown()">
+      <i class="fa-solid fa-user-circle"></i>
+    </button>
+
+    @if(showDropdown){
+
+      <div class="dropdown-menu">
+        <div class="dropdown-header">
+          <strong>{{ user.name }}</strong>
+          <small>{{ user.email }}</small>
+        </div>
+        <a routerLink="/profile" (click)="showDropdown=false">
+          <i class="fa-solid fa-user"></i>
+          My Profile
+        </a>
+        <a routerLink="/mybookings" (click)="showDropdown=false">
+          <i class="fa-solid fa-calendar-check"></i>
+          My Bookings
+        </a>
+        <a routerLink="/events" (click)="showDropdown=false">
+          <i class="fa-solid fa-trophy"></i>
+          Events
+        </a>
+
+        <button (click)="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+
+      </div>
+
     }
-  
+
+  </div>
+
+}
+
   </div>
 </header>

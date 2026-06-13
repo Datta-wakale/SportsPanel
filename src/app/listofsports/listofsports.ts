@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormControl, ReactiveFormsModule} from '@angular/forms';
-import { debounceTime, distinctUntilChanged} from 'rxjs';
+
 import { Sport } from '../shared/interfaces/sport.interface';
 import { Venue } from '../shared/interfaces/venue.interface';
 import { SPORTS } from '../shared/constants/sports.constants';
@@ -24,10 +24,10 @@ export class ListOfSportsComponent implements OnInit {
   ngOnInit(): void {
     // Listen to search input changes
     this.searchControl.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged()
-      )
+       /* .pipe(
+         debounceTime(300),
+        distinctUntilChanged() 
+      )  */
       // Subscribe to search input changes
       .subscribe(value => {
         const searchValue = value?.toLowerCase().trim() || '';
@@ -57,7 +57,7 @@ export class ListOfSportsComponent implements OnInit {
               venue.sportId === selectedSport.id
           );
         }
-
+        
         else {
           this.filteredVenues = [];
         }

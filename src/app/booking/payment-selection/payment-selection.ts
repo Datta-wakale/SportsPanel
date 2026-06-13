@@ -4,7 +4,7 @@ import { BookingService } from '../../services/booking.service';
 import { PaymentPopup } from '../../payment-popup/payment-popup';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
+import { interval, map, take } from 'rxjs';
 @Component({
   selector: 'app-payment-selection',
   imports: [MatDialogModule],

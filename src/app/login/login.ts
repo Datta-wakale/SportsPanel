@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   // onLogin
   onLogin(): void {
     if (this.loginForm.invalid) {
+      // Mark all fields as touched to trigger validation messages
       this.loginForm.markAllAsTouched();
       this.toastr.warning('Please fill out all fields correctly.', 'Validation Error');
       return;
@@ -53,10 +54,9 @@ export class LoginComponent implements OnInit {
     );
 
   if(user){
+    // if user found then login the user
       this.authService.login(user);
-      this.notificationService.setToast('success',
-        'Login Successful',
-        'Welcome back to the portal!');
+      this.notificationService.setToast('success', 'Login Successful', 'Welcome back to the portal!');
         this.router.navigate(['/booking']);
     } else {
       // Trigger error toast for invalid inputs
