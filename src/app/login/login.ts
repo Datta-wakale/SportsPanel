@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
   private toastr = inject(ToastrService); // Injected ToastrService
   private dialog = inject(MatDialog);
   private notificationService = inject(NotificationService);
+  private readonly ADMIN_EMAIL =
+  'admin@gmail.com';
+
+private readonly ADMIN_PASSWORD =
+  'admin123';
   // on component load
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -32,37 +37,93 @@ export class LoginComponent implements OnInit {
   }
   // onLogin
   onLogin(): void {
-    if (this.loginForm.invalid) {
-      // Mark all fields as touched to trigger validation messages
-      this.loginForm.markAllAsTouched();
-      this.toastr.warning('Please fill out all fields correctly.', 'Validation Error');
-      return;
-    }
 
-    const { email, password } = this.loginForm.value;
+  if (this.loginForm.invalid) {
 
-    // SAME ENCRYPTION AS REGISTER
-    const encryptedPassword = password
-      .split('')
-      .map((char: string) => char.charCodeAt(0))
-      .join('-');
-    // retrieve the users from localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    // find the user
-    const user = users.find(
-      (u: any) => u.email === email && u.password === encryptedPassword   
+    this.loginForm.markAllAsTouched();
+
+    this.toastr.warning(
+      'Please fill out all fields correctly.',
+      'Validation Error'
     );
 
-  if(user){
-    // if user found then login the user
-      this.authService.login(user);
-      this.notificationService.setToast('success', 'Login Successful', 'Welcome back to the portal!');
-        this.router.navigate(['/booking']);
-    } else {
-      // Trigger error toast for invalid inputs
-     this.toastr.error('Invalid email or password. Please try again.', 'Login Failed');
-    }
+    return;
+
   }
+
+  const { email, password } =
+    this.loginForm.value;
+
+  // ADMIN LOGIN
+
+  if (
+    email === this.ADMIN_EMAIL &&
+    password === this.ADMIN_PASSWORD
+  ) {
+
+    this.authService.adminLogin();
+
+    this.toastr.success(
+      'Welcome Admin',
+      'Login Successful'
+    );
+
+    this.router.navigate(
+      ['/admin-dashboard']
+    );
+
+    return;
+
+  }
+
+  // NORMAL USER LOGIN
+
+  const encryptedPassword = password
+    .split('')
+    .map(
+      (char: string) =>
+        char.charCodeAt(0)
+    )
+    .join('-');
+
+  const users = JSON.parse(
+    localStorage.getItem(
+      'users'
+    ) || '[]'
+  );
+
+  const user = users.find(
+    (u: any) =>
+      u.email === email &&
+      u.password === encryptedPassword
+  );
+
+  if (user) {
+
+    this.authService.login(user);
+
+    this.notificationService.setToast(
+      'success',
+      'Login Successful',
+      'Welcome back to the portal!'
+    );
+
+    this.router.navigate(
+      ['/booking']
+    );
+
+  }
+
+  else {
+
+    this.toastr.error(
+      'Invalid email or password.',
+      'Login Failed'
+    );
+
+  }
+
+}
   openForgotPassword(): void {
   this.dialog.open(LoginpopupComponent, {
     width: '450px',

@@ -1,0 +1,109 @@
+.sports-container {
+
+    width: 90%;
+
+    margin: 40px auto;
+
+}
+
+.title {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+.add-sport {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+    flex-wrap: wrap;
+
+}
+
+.add-sport input {
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+}
+
+.add-btn {
+
+    background: #22c55e;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+
+.sports-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+.sports-table th {
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 16px;
+
+}
+
+.sports-table td {
+
+    padding: 16px;
+
+    text-align: center;
+
+    border-bottom: 1px solid #ddd;
+
+}
+
+.sport-image {
+
+    width: 100px;
+
+    height: 70px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+}
+
+.delete-btn {
+
+    background: red;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}

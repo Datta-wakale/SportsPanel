@@ -1,0 +1,90 @@
+<div class="add-venue">
+
+    <input
+        type="text"
+        placeholder="Venue Name"
+        [(ngModel)]="newVenue.name">
+
+    <input
+        type="text"
+        placeholder="Location"
+        [(ngModel)]="newVenue.location">
+
+    <input
+        type="number"
+        placeholder="Price"
+        [(ngModel)]="newVenue.price">
+
+    <input
+        type="text"
+        placeholder="Image Path"
+        [(ngModel)]="newVenue.image">
+
+    <button
+        class="add-btn"
+        (click)="addVenue()">
+
+        Add Venue
+
+    </button>
+
+</div>
+<div class="venues-container">
+
+    <h1 class="title">
+
+        Manage Venues
+
+    </h1>
+
+    <table class="venues-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Name</th>
+
+                <th>Location</th>
+
+                <th>Price</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @for (venue of venues; track venue.id) {
+
+            <tr>
+
+                <td>{{venue.name}}</td>
+
+                <td>{{venue.location}}</td>
+
+                <td>₹{{venue.price}}</td>
+
+                <td>
+
+                    <button
+                        class="delete-btn"
+                        (click)="deleteVenue(venue.id)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

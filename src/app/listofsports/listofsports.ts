@@ -45,22 +45,31 @@ export class ListOfSportsComponent implements OnInit {
               .includes(searchValue)
         );
         // Find exact sport
-        const selectedSport = this.sports.find(
-          sport =>
-            sport.name
-              .toLowerCase() === searchValue
-        );
-        if (selectedSport) {
-          // Show venues for that sport
-          this.filteredVenues = this.venues.filter(
-            venue =>
-              venue.sportId === selectedSport.id
-          );
-        }
-        
-        else {
-          this.filteredVenues = [];
-        }
+       const matchingSports = this.sports.filter(
+  sport =>
+    sport.name
+      .toLowerCase()
+      .includes(searchValue)
+);
+
+if (matchingSports.length > 0) {
+
+  const sportIds = matchingSports.map(
+    sport => sport.id
+  );
+
+  this.filteredVenues = this.venues.filter(
+    venue =>
+      sportIds.includes(venue.sportId)
+  );
+
+}
+
+else {
+
+  this.filteredVenues = [];
+
+}
       });
   }
 }

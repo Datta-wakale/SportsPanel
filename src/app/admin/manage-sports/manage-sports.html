@@ -1,0 +1,95 @@
+<div class="add-sport">
+
+    <input
+        type="text"
+        placeholder="Sport Name"
+        [(ngModel)]="newSport.name">
+
+    <input
+        type="text"
+        placeholder="Image Path"
+        [(ngModel)]="newSport.image">
+
+    <button
+        class="add-btn"
+        (click)="addSport()">
+
+        Add Sport
+
+    </button>
+
+</div>
+<div class="sports-container">
+
+    <h1 class="title">
+
+        Manage Sports
+
+    </h1>
+
+    <table class="sports-table">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Image</th>
+
+                <th>Sport Name</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @for (sport of sports; track sport.id) {
+
+            <tr>
+
+                <td>
+
+                    {{sport.id}}
+
+                </td>
+
+                <td>
+
+                    <img
+                        class="sport-image"
+                        [src]="sport.image"
+                        [alt]="sport.name">
+
+                </td>
+
+                <td>
+
+                    {{sport.name}}
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="delete-btn"
+                        (click)="deleteSport(sport.id)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

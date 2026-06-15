@@ -8,67 +8,199 @@
   <!-- MENU -->
   <nav>
     <ul class="left-sidebar-menu">
+
       <li><a routerLink="/home">Home</a></li>
+
       <li><a routerLink="/listofsports">Sports</a></li>
+
       <li><a routerLink="/aboutus">About us</a></li>
+
       <li><a routerLink="/events">Events</a></li>
+
       <li><a routerLink="/contact">Contact us</a></li>
+
       @if(user){
-     <li>
-         <a routerLink="/mybookings">My Bookings</a>
-    </li>
+
+      <li>
+
+        <a routerLink="/mybookings">
+
+          My Bookings
+
+        </a>
+
+      </li>
+
       }
+
     </ul>
   </nav>
-  <!-- BUTTONS -->
+
+  <!-- RIGHT SIDE -->
+
   <div class="right-sidebar">
-    @if (!user) {
-      <button class="sidebar-button register-btn"  routerLink="/register">
-        Register
-      </button>
-       <button class="sidebar-button login-btn" routerLink="/login"> Login </button>
-    }
 
-    @if (user) {
+    @if(!user && !isAdmin){
 
-  <div class="user-menu">
+    <button
+      class="sidebar-button register-btn"
+      routerLink="/register">
 
-    <button class="user-icon-btn" (click)="toggleDropdown()">
-      <i class="fa-solid fa-user-circle"></i>
+      Register
+
     </button>
 
-    @if(showDropdown){
+    <button
+      class="sidebar-button login-btn"
+      routerLink="/login">
+
+      Login
+
+    </button>
+
+    }
+
+    @if(user || isAdmin){
+
+    <div class="user-menu">
+
+      <button
+        class="user-icon-btn"
+        (click)="toggleDropdown()">
+
+        <i class="fa-solid fa-user-circle"></i>
+
+      </button>
+
+      @if(showDropdown){
 
       <div class="dropdown-menu">
+
+        <!-- ADMIN -->
+
+        @if(isAdmin){
+
         <div class="dropdown-header">
-          <strong>{{ user.name }}</strong>
-          <small>{{ user.email }}</small>
+
+          <strong>
+
+            Admin
+
+          </strong>
+
+          <small>
+
+            admin@gmail.com
+
+          </small>
+
         </div>
-        <a routerLink="/profile" (click)="showDropdown=false">
-          <i class="fa-solid fa-user"></i>
-          My Profile
-        </a>
-        <a routerLink="/mybookings" (click)="showDropdown=false">
-          <i class="fa-solid fa-calendar-check"></i>
-          My Bookings
-        </a>
-        <a routerLink="/events" (click)="showDropdown=false">
-          <i class="fa-solid fa-trophy"></i>
-          Events
+
+        <a
+          routerLink="/admin-dashboard"
+          (click)="showDropdown=false">
+
+          Dashboard
+
         </a>
 
-        <button (click)="logout()">
+        <a
+          routerLink="/manage-users"
+          (click)="showDropdown=false">
+
+          Manage Users
+
+        </a>
+
+        <a
+          routerLink="/manage-bookings"
+          (click)="showDropdown=false">
+
+          Manage Bookings
+
+        </a>
+
+        <a
+          routerLink="/manage-sports"
+          (click)="showDropdown=false">
+
+          Manage Sports
+
+        </a>
+
+        <a
+          routerLink="/manage-venues"
+          (click)="showDropdown=false">
+
+          Manage Venues
+
+        </a>
+
+        }
+
+        <!-- USER -->
+
+        @else {
+
+        <div class="dropdown-header">
+
+          <strong>
+
+            {{user?.name}}
+
+          </strong>
+
+          <small>
+
+            {{user?.email}}
+
+          </small>
+
+        </div>
+
+        <a
+          routerLink="/profile"
+          (click)="showDropdown=false">
+
+          My Profile
+
+        </a>
+
+        <a
+          routerLink="/mybookings"
+          (click)="showDropdown=false">
+
+          My Bookings
+
+        </a>
+
+        <a
+          routerLink="/events"
+          (click)="showDropdown=false">
+
+          Events
+
+        </a>
+
+        }
+
+        <button
+          (click)="logout()">
+
           <i class="fa-solid fa-right-from-bracket"></i>
+
           Logout
+
         </button>
 
       </div>
 
+      }
+
+    </div>
+
     }
 
   </div>
 
-}
-
-  </div>
 </header>

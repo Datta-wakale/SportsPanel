@@ -1,0 +1,102 @@
+.venues-container {
+
+    width: 90%;
+
+    margin: 40px auto;
+
+}
+
+.title {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+.venues-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+.venues-table th {
+
+    background: #7c3aed;
+
+    color: white;
+
+    padding: 16px;
+
+}
+
+.venues-table td {
+
+    padding: 16px;
+
+    text-align: center;
+
+    border-bottom: 1px solid #ddd;
+
+}
+
+.delete-btn {
+
+    background: red;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 15px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+.add-venue {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+    flex-wrap: wrap;
+
+}
+
+.add-venue input {
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+}
+
+.add-btn {
+
+    background: #22c55e;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+
+.add-btn:hover {
+
+    background: #16a34a;
+
+}

@@ -26,21 +26,38 @@ export class Headerpart implements OnInit {
   private authService = inject(Auth);
   private dialog = inject(MatDialog);
   showDropdown = false;
+  isAdmin = false;
   // on component load
   ngOnInit(): void {
 
     // Observable Logic
-    this.authService.loginStatus
-      .subscribe(status => {
-        this.showDropdown= false;
-        if (status) {
-          this.user = this.authService.getUser();
-        } else {
-          // if logged out then clear user data
-          this.user = null;
-        }
+   this.authService.loginStatus
+  .subscribe(status => {
 
-      });
+    this.showDropdown = false;
+
+    this.isAdmin = this.authService.isAdminLoggedIn();
+
+    if (status && !this.isAdmin) {
+
+      this.user = this.authService.getUser();
+
+    }
+
+    else if (this.isAdmin) {
+
+      this.user = null;
+
+    }
+
+    else {
+
+      this.user = null;
+      this.isAdmin = false;
+
+    }
+
+});
 
     // Existing Toastr Logic with Router Events
     this.router.events

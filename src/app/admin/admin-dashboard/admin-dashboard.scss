@@ -1,0 +1,46 @@
+h1{
+    text-align:center;
+    margin:40px 0;
+}
+
+.cards{
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+    padding:30px;
+}
+
+.card{
+    padding:40px;
+
+    border-radius:20px;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.sports{
+    background:#2563eb;
+}
+
+.venues{
+    background:#7c3aed;
+}
+
+.users{
+    background:#ec4899;
+}
+
+.bookings{
+    background:#f97316;
+}
