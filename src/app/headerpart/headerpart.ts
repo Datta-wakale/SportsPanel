@@ -14,7 +14,7 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-headerpart',
-  imports: [RouterLink, CommonModule,FontAwesomeModule],
+  imports: [RouterLink, CommonModule, FontAwesomeModule],
   templateUrl: './headerpart.html',
   styleUrl: './headerpart.scss',
 })
