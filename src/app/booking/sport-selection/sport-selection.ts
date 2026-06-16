@@ -18,5 +18,6 @@ export class SportSelection {
   selectSport(sport: any): void {
     this.bookingService.selectedSport = sport;
     this.bookingService.setStep(2);
+  
   }
 }

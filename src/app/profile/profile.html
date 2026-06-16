@@ -3,7 +3,7 @@
   <!-- Welcome Section -->
   <div class="welcome-card">
     <h1>
-      <i class="fa-solid fa-user"></i>
+      <fa-icon [icon]="faUser"></fa-icon>
       Welcome,
       {{ user?.name || user?.email }}
     </h1>
@@ -19,7 +19,7 @@
     </div>
     <div class="stat-card">
       <h2>{{ favoriteSport }}</h2>
-      <p>Favorite Sport</p>
+      <p>Frequently Booked Sport</p>
     </div>
 
     <div class="stat-card">
@@ -33,36 +33,18 @@
   <!-- Achievements -->
 <div class="achievements-section">
   <h2>
-    <i class="fa-solid fa-trophy"></i>
-    Achievements
+    <fa-icon [icon]="faTrophy"></fa-icon>
+     Achievements
   </h2>
   <div class="badges-container">
-    @if(totalBookings >= 5){
-      <div class="badge-card bronze">
-        <i class="fa-solid fa-medal"></i>
-        <span>Booking Enthusiast</span>
+    @for (achievement of achievements; track achievement.title) {
+      <div class="badge-card" [class]="achievement.class">
+        <fa-icon [icon]="achievement.icon"></fa-icon>
+        <span>
+          {{ achievement.title }}
+        </span>
       </div>
     }
-    @if(totalBookings >= 10){
-      <div class="badge-card silver">
-        <i class="fa-solid fa-star"></i>
-        <span>Regular Player</span>
-      </div>
-    }
-    @if(totalBookings >= 25){
-      <div class="badge-card gold">
-        <i class="fa-solid fa-crown"></i>
-        <span>Champion</span>
-      </div>
-    }
-
-    @if(sports.filter(s => s.bookings > 0).length >= 3){
-      <div class="badge-card multi">
-        <i class="fa-solid fa-fire"></i>
-        <span>Multi-Sport Player</span>
-      </div>
-    }
-
   </div>
 </div>
 

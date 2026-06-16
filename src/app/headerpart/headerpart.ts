@@ -9,16 +9,19 @@ import { ToastrService } from 'ngx-toastr';
 import { NotificationService } from '../services/notification-service';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutConfirmDialog } from '../logout-confirm/logout-confirm';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-headerpart',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule,FontAwesomeModule],
   templateUrl: './headerpart.html',
   styleUrl: './headerpart.scss',
 })
 export class Headerpart implements OnInit {
   // user data
   user: User | null = null;
-
+  faUser = faCircleUser;
   // injected
   private toastr = inject(ToastrService);
   private notificationService = inject(NotificationService);
@@ -33,28 +36,18 @@ export class Headerpart implements OnInit {
     // Observable Logic
    this.authService.loginStatus
   .subscribe(status => {
-
     this.showDropdown = false;
-
     this.isAdmin = this.authService.isAdminLoggedIn();
-
+    // Update user data based on login status and admin status
     if (status && !this.isAdmin) {
-
       this.user = this.authService.getUser();
-
     }
-
     else if (this.isAdmin) {
-
       this.user = null;
-
     }
-
     else {
-
       this.user = null;
       this.isAdmin = false;
-
     }
 
 });
@@ -125,7 +118,6 @@ export class Headerpart implements OnInit {
       // navigate to home page
       this.router.navigate(['/home']);
     }
-
   });
 }
 }

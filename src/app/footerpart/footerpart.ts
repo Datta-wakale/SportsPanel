@@ -22,7 +22,9 @@ export class Footerpart {
   get user(): User | null {
     return this.authService.getUser();
   }
-
+  get isAdmin(): boolean {
+  return this.authService.isAdminLoggedIn();
+}
   // when click on help center open helpCenter box 
   openHelpCenter(){
     this.dialog.open(HelpcenterPopup, {

@@ -1,0 +1,37 @@
+<h1>Admin Dashboard</h1>
+
+<section class="admin-info">
+    <h2>Administration Overview</h2>
+
+    <p>
+        Welcome to the Sports Booking Administration Portal.
+    </p>
+
+    <p>
+        Regular monitoring and timely updates help ensure a seamless experience.
+    </p>
+</section>
+
+<div class="cards">
+    <div class="card sports" routerLink="manage-sports">
+        <h2>Manage Sports</h2>
+        <p>Add, Edit and Delete Sports</p>
+    </div>
+
+    <div class="card venues" routerLink="manage-venues">
+        <h2>Manage Venues</h2>
+        <p>Add, Edit and Delete Venues</p>
+    </div>
+
+    <div class="card users" routerLink="manage-users">
+        <h2>Manage Users</h2>
+        <p>View Registered Users</p>
+    </div>
+
+    <div class="card bookings" routerLink="manage-bookings">
+        <h2>Manage Bookings</h2>
+        <p>View and Update Bookings</p>
+    </div>
+</div>
+
+<button id="backbtn" type="button" routerLink="/home"> BackToHome</button>

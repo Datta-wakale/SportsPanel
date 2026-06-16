@@ -1,71 +1,36 @@
 <div class="users-container">
-
     <h1 class="title">
-
         Manage Users
-
     </h1>
-
     <table class="users-table">
-
         <thead>
-
             <tr>
-
                 <th>Name</th>
-
                 <th>Email</th>
-
                 <th>Phone</th>
-
                 <th>Action</th>
-
             </tr>
-
         </thead>
-
         <tbody>
-
             @for (user of users; track user.email) {
-
             <tr>
-
                 <td>
-
                     {{user.name}}
-
                 </td>
-
                 <td>
-
                     {{user.email}}
-
                 </td>
-
                 <td>
-
                     {{user.phone}}
-
                 </td>
-
                 <td>
-
-                    <button
-                        class="delete-btn"
-                        (click)="deleteUser(user.email)">
-
+                    <button class="delete-btn" (click)="deleteUser(user.email)">
                         Delete
-
                     </button>
-
                 </td>
-
             </tr>
-
             }
-
         </tbody>
-
     </table>
-
+    <button id="back" routerLink="../">Back</button>
 </div>

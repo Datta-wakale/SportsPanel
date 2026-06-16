@@ -1,0 +1,69 @@
+h1 {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 30px;
+}
+
+.card {
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.sports {
+    background: #2563eb;
+}
+
+.venues {
+    background: #7c3aed;
+}
+
+.users {
+    background: #ec4899;
+}
+
+.bookings {
+    background: #f97316;
+}
+.admin-info {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 30px;
+    text-align: center;
+}
+
+.admin-info h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.admin-info p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+#backbtn{
+  margin-top: 14px;
+  outline: none;
+  border: none;
+  background: #000;
+  color: white;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  position: absolute;
+  top: 88px;
+  left: 60px;
+}

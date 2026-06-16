@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-manage-users',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './manage-users.html',
   styleUrl: './manage-users.scss'
 })
@@ -12,9 +13,7 @@ export class ManageUsersComponent implements OnInit {
   users: any[] = [];
 
   ngOnInit(): void {
-
     this.loadUsers();
-
   }
 
   loadUsers(): void {

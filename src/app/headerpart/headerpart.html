@@ -1,5 +1,4 @@
 <header class="header">
-
   <!-- LOGO -->
   <div class="logo">
     <a href="#">SportZone</a>
@@ -8,164 +7,106 @@
   <!-- MENU -->
   <nav>
     <ul class="left-sidebar-menu">
-
       <li><a routerLink="/home">Home</a></li>
-
       <li><a routerLink="/listofsports">Sports</a></li>
-
       <li><a routerLink="/aboutus">About us</a></li>
-
       <li><a routerLink="/events">Events</a></li>
-
       <li><a routerLink="/contact">Contact us</a></li>
-
       @if(user){
-
       <li>
-
         <a routerLink="/mybookings">
-
           My Bookings
-
         </a>
-
       </li>
-
       }
-
     </ul>
   </nav>
 
   <!-- RIGHT SIDE -->
 
   <div class="right-sidebar">
-
     @if(!user && !isAdmin){
-
     <button
       class="sidebar-button register-btn"
       routerLink="/register">
-
       Register
-
     </button>
 
     <button
       class="sidebar-button login-btn"
       routerLink="/login">
-
       Login
-
     </button>
 
     }
-
     @if(user || isAdmin){
-
     <div class="user-menu">
-
       <button
         class="user-icon-btn"
         (click)="toggleDropdown()">
-
-        <i class="fa-solid fa-user-circle"></i>
-
+        <!-- <i class="fa-solid fa-user-circle"></i> -->
+         <fa-icon [icon]="faUser"></fa-icon>
       </button>
 
       @if(showDropdown){
-
       <div class="dropdown-menu">
-
         <!-- ADMIN -->
-
         @if(isAdmin){
-
         <div class="dropdown-header">
-
           <strong>
-
             Admin
-
           </strong>
-
           <small>
-
             admin@gmail.com
-
           </small>
-
         </div>
 
         <a
           routerLink="/admin-dashboard"
           (click)="showDropdown=false">
-
           Dashboard
-
         </a>
 
         <a
-          routerLink="/manage-users"
+          [routerLink]="['/admin-dashboard','manage-users']"
           (click)="showDropdown=false">
-
           Manage Users
-
         </a>
-
         <a
-          routerLink="/manage-bookings"
+          [routerLink]="['/admin-dashboard','manage-bookings']"
           (click)="showDropdown=false">
-
           Manage Bookings
-
         </a>
 
         <a
-          routerLink="/manage-sports"
+          [routerLink]="['/admin-dashboard','manage-sports']"
           (click)="showDropdown=false">
-
           Manage Sports
-
         </a>
 
         <a
-          routerLink="/manage-venues"
+          [routerLink]="['/admin-dashboard','manage-venues']"
           (click)="showDropdown=false">
-
           Manage Venues
-
         </a>
 
         }
-
         <!-- USER -->
 
         @else {
-
         <div class="dropdown-header">
-
           <strong>
-
             {{user?.name}}
-
           </strong>
-
           <small>
-
             {{user?.email}}
-
           </small>
-
         </div>
-
         <a
           routerLink="/profile"
           (click)="showDropdown=false">
-
           My Profile
-
         </a>
-
         <a
           routerLink="/mybookings"
           (click)="showDropdown=false">
@@ -186,13 +127,10 @@
 
         <button
           (click)="logout()">
-
-          <i class="fa-solid fa-right-from-bracket"></i>
-
+          <!-- <i class="fa-solid fa-right-from-bracket"></i> -->
+        <fa-icon [icon]="faUser"></fa-icon>
           Logout
-
         </button>
-
       </div>
 
       }

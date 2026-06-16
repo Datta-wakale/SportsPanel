@@ -1,18 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {faUser,faTrophy,faMedal,faStar,faCrown,faFire} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink,FontAwesomeModule],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })
 export class ProfileComponent implements OnInit {
   // inject router
    constructor(private router: Router) {}
+   faUser = faUser;
+   faTrophy = faTrophy;
+   faMedal = faMedal;
+   faStar = faStar;
+   faCrown = faCrown;
+   faFire = faFire;
   // user data
   user: any = null;
+  // achievements
+   achievements: any[] = [];
   // data for bookings summary
   totalBookings = 0;
   favoriteSport = 'No Favorite Sport Yet';
@@ -50,10 +60,44 @@ export class ProfileComponent implements OnInit {
     );
     // if max bookings is 0 then show no bookings yet
     this.favoriteSport = maxSport.bookings > 0 ? maxSport.name : 'No Favorite Sport Yet';
+     this.loadAchievements();
+  }
+  loadAchievements():void {
+    
+    if(this.totalBookings >=5){
+      this.achievements.push({
+        title : "Booking Enthusiast",
+        class : "bronze",
+        icon : faMedal
+      })
+    }
+     if (this.totalBookings >= 10) {
+      this.achievements.push({
+        title: 'Regular Player',
+        class: 'silver',
+        icon: faStar
+      });
+    }
+
+    if (this.totalBookings >= 25) {
+      this.achievements.push({
+        title: 'Champion',
+        class: 'gold',
+        icon: faCrown
+      });
+    }
+    const activeSports = this.sports.filter(s => s.bookings > 0).length;
+
+      if(activeSports >= 3){
+        this.achievements.push({
+          title : "Multi-Sport Player",
+          class : "multi",
+          icon : faFire
+        })
+      }
   }
   // navigate to mybookings page
   goToBookings(): void{
      this.router.navigate(['/mybookings']);
   }
-
 }

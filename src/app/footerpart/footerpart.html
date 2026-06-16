@@ -23,22 +23,25 @@
             </ul>
         </div>
 
-      
         <!-- ACCOUNT -->
         <div class="footer-col">
             <h3>Account</h3>
             <ul>
-
-                @if(!user) {
+                @if(!user && !isAdmin) {
                 <li><a routerLink="/login">Login</a></li>
                 <li><a routerLink="/register">Register</a></li>
                 }
-
                 @if(user) {
                 <li><a routerLink="/profile">Profile</a></li>
                 }
+                @if(isAdmin) {
+                <li><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
+                }
                 <li>
-                <a id="point" (click)="openHelpCenter()"> Help Center </a></li>
+                    <a id="point" (click)="openHelpCenter()">
+                        Help Center
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -54,10 +57,8 @@
                     <i class="fab fa-x-twitter"></i>
                     <i class="fab fa-instagram"></i>
                 </div>
-
             </div>
         </div>
-
     </div>
 
     <!-- BOTTOM BAR -->
@@ -65,5 +66,4 @@
         <p>© 2026 SportsZone. All rights reserved.</p>
         <p>Made for sports lovers </p>
     </div>
-
 </footer>
