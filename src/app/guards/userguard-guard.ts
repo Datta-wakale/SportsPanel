@@ -7,13 +7,12 @@ export const userGuard: CanActivateFn = () => {
   const auth = inject(Auth);
   const router = inject(Router);
 
-  if (auth.getUser()) {
+  if (auth.user()) {
     return true;
   }
 
-  if (auth.isAdminLoggedIn()) {
-    return router.createUrlTree(['/admin-dashboard']);
-  }
+  return auth.isAdmin()
+    ? router.createUrlTree(['/admin-dashboard'])
+    : router.createUrlTree(['/login']);
 
-  return router.createUrlTree(['/login']);
 };

@@ -1,64 +1,79 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { User } from '../shared/interfaces/user.interface';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Auth {
 
-  private storageKey = 'loggedInUser';
-  private adminKey = 'adminLoggedIn';
-  private loginStatusSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  private readonly storageKey = 'loggedInUser';
+  private readonly adminKey = 'adminLoggedIn';
 
-  loginStatus = this.loginStatusSubject.asObservable();
+  // Signals
+  user = signal<User | null>(this.loadUser());
+  isAdmin = signal(this.loadAdmin());
 
-  // GET NORMAL USER
-  getUser(): User | null {
-    const data = localStorage.getItem( this.storageKey );
-    return data ? JSON.parse(data) : null;
+  private loadUser(): User | null {
+
+    const data = localStorage.getItem(this.storageKey);
+
+    return data
+      ? JSON.parse(data)
+      : null;
 
   }
 
- // USER LOGIN
-login(user: User): void {
+  private loadAdmin(): boolean {
 
-  // Remove admin session if present
-  localStorage.removeItem(this.adminKey);
+    return localStorage.getItem(this.adminKey) === 'true';
 
-  localStorage.setItem( this.storageKey,JSON.stringify(user));
+  }
 
-  this.loginStatusSubject.next(true);
-}
+  // USER LOGIN
+  login(user: User): void {
 
-// ADMIN LOGIN
-adminLogin(): void {
-  // Remove user session if present
-  localStorage.removeItem(this.storageKey);
-  localStorage.setItem( this.adminKey, 'true' );
-  this.loginStatusSubject.next(true);
-}
-  // CHECK ADMIN
-  isAdminLoggedIn(): boolean {
-    return localStorage.getItem( this.adminKey ) === 'true';
+    localStorage.removeItem(this.adminKey);
+
+    localStorage.setItem(
+      this.storageKey,
+      JSON.stringify(user)
+    );
+
+    this.user.set(user);
+    this.isAdmin.set(false);
+
+  }
+
+  // ADMIN LOGIN
+  adminLogin(): void {
+
+    localStorage.removeItem(this.storageKey);
+
+    localStorage.setItem(
+      this.adminKey,
+      'true'
+    );
+
+    this.user.set(null);
+    this.isAdmin.set(true);
+
   }
 
   // LOGOUT
   logout(): void {
 
-    localStorage.removeItem(  this.storageKey);
-    localStorage.removeItem(  this.adminKey );
-    this.loginStatusSubject.next(false);
+    localStorage.removeItem(this.storageKey);
+    localStorage.removeItem(this.adminKey);
+
+    this.user.set(null);
+    this.isAdmin.set(false);
 
   }
 
-  // CHECK LOGIN
+  // Optional helper
   isLoggedIn(): boolean {
 
-    return (
-      this.getUser() !== null ||
-      this.isAdminLoggedIn()
-    );
+    return this.user() !== null || this.isAdmin();
 
   }
 

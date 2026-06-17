@@ -27,14 +27,14 @@
         <div class="footer-col">
             <h3>Account</h3>
             <ul>
-                @if(!user && !isAdmin) {
+                @if(!user() && !isAdmin()) {
                 <li><a routerLink="/login">Login</a></li>
                 <li><a routerLink="/register">Register</a></li>
                 }
-                @if(user) {
+                @if(user()) {
                 <li><a routerLink="/profile">Profile</a></li>
                 }
-                @if(isAdmin) {
+                @if(isAdmin()) {
                 <li><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
                 }
                 <li>

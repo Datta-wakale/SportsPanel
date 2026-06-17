@@ -12,7 +12,7 @@
       <li><a routerLink="/aboutus">About us</a></li>
       <li><a routerLink="/events">Events</a></li>
       <li><a routerLink="/contact">Contact us</a></li>
-      @if(user){
+      @if(user()){
       <li>
         <a routerLink="/mybookings">
           My Bookings
@@ -25,7 +25,7 @@
   <!-- RIGHT SIDE -->
 
   <div class="right-sidebar">
-    @if(!user && !isAdmin){
+    @if(!user() && !isAdmin()){
     <button
       class="sidebar-button register-btn"
       routerLink="/register">
@@ -39,19 +39,20 @@
     </button>
 
     }
-    @if(user || isAdmin){
+    @if(user() || isAdmin()){
     <div class="user-menu">
       <button
         class="user-icon-btn"
         (click)="toggleDropdown()">
-        <!-- <i class="fa-solid fa-user-circle"></i> -->
-         <fa-icon [icon]="faUser"></fa-icon>
+        logout
+         <!-- <i class="fa-solid fa-user-circle"></i>  -->
+         <!-- <fa-icon [icon]="faUser"></fa-icon> -->
       </button>
 
       @if(showDropdown){
       <div class="dropdown-menu">
         <!-- ADMIN -->
-        @if(isAdmin){
+        @if(isAdmin()){
         <div class="dropdown-header">
           <strong>
             Admin
@@ -96,10 +97,10 @@
         @else {
         <div class="dropdown-header">
           <strong>
-            {{user?.name}}
+            {{user()?.name}}
           </strong>
           <small>
-            {{user?.email}}
+            {{user()?.email}}
           </small>
         </div>
         <a
@@ -128,7 +129,7 @@
         <button
           (click)="logout()">
           <!-- <i class="fa-solid fa-right-from-bracket"></i> -->
-        <fa-icon [icon]="faUser"></fa-icon>
+        <!-- <fa-icon [icon]="faUser"></fa-icon> -->
           Logout
         </button>
       </div>
