@@ -69,7 +69,8 @@ private readonly ADMIN_PASSWORD =
     );
 
     this.router.navigate(
-      ['/admin-dashboard']
+      ['/admin-dashboard'],
+      {replaceUrl:true}
     );
 
     return;
@@ -101,29 +102,19 @@ private readonly ADMIN_PASSWORD =
   if (user) {
 
     this.authService.login(user);
-
-    this.notificationService.setToast(
-      'success',
-      'Login Successful',
-      'Welcome back to the portal!'
-    );
-
-    this.router.navigate(
-      ['/booking']
-    );
-
+    // set Notifications for successfull user
+    this.notificationService.setToast('success','Login Successful','Welcome back to the portal!');
+    // route to the booking page when successfull login
+    this.router.navigate( ['/booking'],
+      { replaceUrl: true});
   }
 
   else {
-
-    this.toastr.error(
-      'Invalid email or password.',
-      'Login Failed'
-    );
-
+    this.toastr.error('Invalid email or password.', 'Login Failed' );
   }
 
 }
+// open pop up for forgetpassword
   openForgotPassword(): void {
   this.dialog.open(LoginpopupComponent, {
     width: '450px',

@@ -20,16 +20,24 @@ export class Auth {
 
   }
 
-  // USER LOGIN
-  login(user: User): void {
-    localStorage.setItem( this.storageKey, JSON.stringify(user));
-    this.loginStatusSubject.next(true);
-  }
-  // ADMIN LOGIN
-  adminLogin(): void {
-    localStorage.setItem(this.adminKey, 'true');
-    this.loginStatusSubject.next(true);
-  }
+ // USER LOGIN
+login(user: User): void {
+
+  // Remove admin session if present
+  localStorage.removeItem(this.adminKey);
+
+  localStorage.setItem( this.storageKey,JSON.stringify(user));
+
+  this.loginStatusSubject.next(true);
+}
+
+// ADMIN LOGIN
+adminLogin(): void {
+  // Remove user session if present
+  localStorage.removeItem(this.storageKey);
+  localStorage.setItem( this.adminKey, 'true' );
+  this.loginStatusSubject.next(true);
+}
   // CHECK ADMIN
   isAdminLoggedIn(): boolean {
     return localStorage.getItem( this.adminKey ) === 'true';
@@ -40,7 +48,6 @@ export class Auth {
 
     localStorage.removeItem(  this.storageKey);
     localStorage.removeItem(  this.adminKey );
-
     this.loginStatusSubject.next(false);
 
   }

@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            @for (booking of bookings; track booking.id) {
+            @for (booking of bookings(); track booking.id) {
             <tr>
                 <td>{{booking.sportName}}</td>
                 <td>{{booking.venueName}}</td>
@@ -29,27 +29,29 @@
                     ₹{{booking.amount}}
                 </td>
                 <td>
-                    <span
-                        class="status"
-                        [class.upcoming]="booking.status === 'Upcoming'"
+                    <span class="status" [class.upcoming]="booking.status === 'Upcoming'"
                         [class.completed]="booking.status === 'Completed'"
                         [class.cancelled]="booking.status === 'Cancelled'">
-                        
+
                         {{booking.status}}
 
                     </span>
                 </td>
                 <td>
-                    <button
-                        class="complete-btn"
-                        (click)="completeBooking(booking.id)">
-                        Complete
-                    </button>
-                    <button
-                        class="cancel-btn"
-                        (click)="cancelBooking(booking.id)">
+                    @if (booking.status === 'Upcoming') {
+
+                    <button class="cancel-btn" (click)="cancelBooking(booking.id)">
                         Cancel
                     </button>
+
+                    }
+                    @else {
+
+                    <span>
+                        No actions available
+                    </span>
+
+                    }
                 </td>
             </tr>
             }

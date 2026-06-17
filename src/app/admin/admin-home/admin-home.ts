@@ -18,18 +18,14 @@ export class AdminHome implements OnInit {
   ngOnInit(): void {
     // Sports count
     this.sportsCount = SPORTS.length;
-
     // Venues count
     this.venuesCount = VENUES.length;
-
     // Users count
     this.usersCount = JSON.parse(
       localStorage.getItem('users') || '[]'
     ).length;
-
     // Bookings count
     this.bookingsCount = JSON.parse(
-      localStorage.getItem('bookings') || '[]'
-    ).length;
+    localStorage.getItem('bookings') || '[]' ).length;
   }
 }

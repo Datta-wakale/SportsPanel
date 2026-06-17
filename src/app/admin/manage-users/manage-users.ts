@@ -8,11 +8,7 @@ import { NotificationService } from '../../services/notification-service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-manage-users',
-  imports: [
-    CommonModule,
-    RouterLink,
-    MatDialogModule
-  ],
+  imports: [CommonModule,RouterLink, MatDialogModule ],
   templateUrl: './manage-users.html',
   styleUrl: './manage-users.scss'
 })
@@ -34,9 +30,9 @@ export class ManageUsersComponent implements OnInit {
     );
 
   }
-
+  // delete user based on email
   deleteUser(email: string): void {
-
+    // open dialog box
     const dialogRef = this.dialog.open(UserDelete, {
       width: '350px',
       disableClose: true,
@@ -47,15 +43,16 @@ export class ManageUsersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      // if result is there execute this block
       if (result) {
-
+        // filter email
         this.users = this.users.filter( user => user.email !== email);
+        // after deleting the user , store updated users in localStorage
         localStorage.setItem( 'users', JSON.stringify(this.users));
-        this.toastr.success("user Delete", "User Deleted successfully");
+        //show toastr notification for user deletion
+        this.toastr.success("User Delete", "User Deleted Successfully");
+    
       }
     });
-
   }
-
 }
