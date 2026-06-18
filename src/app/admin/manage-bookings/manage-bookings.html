@@ -1,53 +1,56 @@
 <div class="bookings-container">
-    <h1 class="title">
+    <h1 class="bookings-title">
         Manage Bookings
     </h1>
     <table class="bookings-table">
-        <thead>
-            <tr>
-                <th>Sport</th>
-                <th>Venue</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Actions</th>
+        <thead class="bookings-table-header">
+            <tr class="bookings-header-row">
+                <th class="bookings-header-cell">Sport</th>
+                <th class="bookings-header-cell">Venue</th>
+                <th class="bookings-header-cell">Date</th>
+                <th class="bookings-header-cell">Time</th>
+                <th class="bookings-header-cell">Amount</th>
+                <th class="bookings-header-cell">Status</th>
+                <th class="bookings-header-cell">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="bookings-table-body">
             @for (booking of bookings(); track booking.id) {
-            <tr>
-                <td>{{booking.sportName}}</td>
-                <td>{{booking.venueName}}</td>
-                <td>{{booking.date}}</td>
-                <td>
+            <tr class="booking-row">
+                <td class="booking-cell">{{booking.sportName}}</td>
+                <td class="booking-cell">{{booking.venueName}}</td>
+                <td class="booking-cell">{{booking.date}}</td>
+                <td class="booking-cell">
                     {{booking.fromTime}}
                     -
                     {{booking.toTime}}
                 </td>
-                <td>
+                <td class="booking-cell">
                     ₹{{booking.amount}}
                 </td>
-                <td>
-                    <span class="status" [class.upcoming]="booking.status === 'Upcoming'"
+                <td class="booking-cell">
+                    <span
+                        class="status"
+                        [class.upcoming]="booking.status === 'Upcoming'"
                         [class.completed]="booking.status === 'Completed'"
                         [class.cancelled]="booking.status === 'Cancelled'">
 
                         {{booking.status}}
-
                     </span>
                 </td>
-                <td>
+                <td class="booking-cell">
                     @if (booking.status === 'Upcoming') {
+                    <button
+                        class="cancel-btn"
+                        (click)="cancelBooking(booking.id)">
 
-                    <button class="cancel-btn" (click)="cancelBooking(booking.id)">
                         Cancel
                     </button>
 
                     }
                     @else {
 
-                    <span>
+                    <span class="no-actions">
                         No actions available
                     </span>
 
@@ -57,5 +60,7 @@
             }
         </tbody>
     </table>
-    <button type="button" id="back" routerLink="../">Back</button>
+    <button type="button" class="back-btn" routerLink="../">
+        Back
+    </button>
 </div>

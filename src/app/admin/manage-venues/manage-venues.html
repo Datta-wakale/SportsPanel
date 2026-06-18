@@ -1,51 +1,60 @@
-<div class="add-venue">
-
-    <input
-        type="text"
-        placeholder="Venue Name"
-        [(ngModel)]="newVenue.name">
-
-    <input
-        type="text"
-        placeholder="Location"
-        [(ngModel)]="newVenue.location">
-
-    <input
-        type="number"
-        placeholder="Price"
-        [(ngModel)]="newVenue.price">
-
-    <input
-        type="text"
-        placeholder="Image Path"
-        [(ngModel)]="newVenue.image">
-
-    <button
-        class="add-btn"
-        (click)="addVenue()">
-        Add Venue
-    </button>
-</div>
 <div class="venues-container">
-    <h1 class="title">
+    <div class="add-venue">
+        <input
+            class="venue-input"
+            type="text"
+            placeholder="Venue Name"
+            [(ngModel)]="newVenue.name">
+
+        <input
+            class="venue-input"
+            type="text"
+            placeholder="Location"
+            [(ngModel)]="newVenue.location">
+
+        <input
+            class="venue-input"
+            type="number"
+            placeholder="Price"
+            [(ngModel)]="newVenue.price">
+
+        <input
+            class="venue-input"
+            type="text"
+            placeholder="Image Path"
+            [(ngModel)]="newVenue.image">
+
+        <button
+            class="add-btn"
+            (click)="addVenue()">
+            Add Venue
+        </button>
+    </div>
+    <h1 class="venues-title">
         Manage Venues
     </h1>
     <table class="venues-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Price</th>
-                <th>Action</th>
+        <thead class="venues-table-header">
+            <tr class="venues-header-row">
+                <th class="venues-header-cell">Name</th>
+                <th class="venues-header-cell">Location</th>
+                <th class="venues-header-cell">Price</th>
+                <th class="venues-header-cell">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="venues-table-body">
             @for (venue of venues; track venue.id) {
-            <tr>
-                <td>{{venue.name}}</td>
-                <td>{{venue.location}}</td>
-                <td>₹{{venue.price}}</td>
-                <td>
+            <tr class="venue-row">
+                <td class="venue-cell">
+                    {{venue.name}}
+                </td>
+                <td class="venue-cell">
+                    {{venue.location}}
+                </td>
+                <td class="venue-cell">
+                    ₹{{venue.price}}
+                </td>
+                <td class="venue-cell">
                     <button
                         class="delete-btn"
                         (click)="deleteVenue(venue.id)">
@@ -56,5 +65,10 @@
             }
         </tbody>
     </table>
-    <button id="back" routerLink="../" (click)="onClick()">Back</button>
+    <button
+        class="back-btn"
+        routerLink="../"
+        (click)="onClick()">
+        Back
+    </button>
 </div>

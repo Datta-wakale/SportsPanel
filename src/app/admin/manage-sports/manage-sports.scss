@@ -1,76 +1,96 @@
-.sports-container {
-    width: 90%;
-    margin: 40px auto;
-}
-.title {
-    text-align: center;
-    margin-bottom: 30px;
-}
+.main-container {
+    margin-top: 90px;
 
-.add-sport {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-}
+    .add-sport {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
 
-.add-sport input {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
+        .sport-input {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
 
-.add-btn {
-    background: #22c55e;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-}
+        .add-btn {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    }
 
-.sports-table {
-    width: 100%;
-    border-collapse: collapse;
-}
+    .sports-container {
+        width: 90%;
+        margin: 40px auto;
 
-.sports-table th {
-    background: #2563eb;
-    color: white;
-    padding: 16px;
-}
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-.sports-table td {
-    padding: 16px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-}
+        .sports-table {
+            width: 100%;
+            border-collapse: collapse;
 
-.sport-image {
-    width: 100px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 10px;
-}
+            .sports-table-header {
 
-.delete-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-#back{
-  margin-top: 14px;
-  outline: none;
-  border: none;
-  background: #000;
-  color: white;
-  border-radius: 6px;
-  padding: 8px;
-  cursor: pointer;
-  position: absolute;
-  top: 88px;
-  right: 60px;
+                .sports-header-row {
+
+                    .sports-header-cell {
+                        background: #2563eb;
+                        color: white;
+                        padding: 16px;
+                    }
+
+                }
+
+            }
+
+            .sports-table-body {
+
+                .sport-row {
+
+                    .sport-cell {
+                        padding: 16px;
+                        text-align: center;
+                        border-bottom: 1px solid #ddd;
+                    }
+
+                    .sport-image {
+                        width: 100px;
+                        height: 70px;
+                        object-fit: cover;
+                        border-radius: 10px;
+                    }
+
+                    .delete-btn {
+                        background: red;
+                        color: white;
+                        border: none;
+                        padding: 10px 16px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .back-btn {
+            margin-top: 14px;
+            outline: none;
+            border: none;
+            background: #000;
+            color: white;
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+            position: absolute;
+            top: 88px;
+            right: 60px;
+        }
+    }
 }

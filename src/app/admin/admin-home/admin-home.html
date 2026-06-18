@@ -1,47 +1,69 @@
-<h1>Admin Dashboard</h1>
-<div class="stats-container">
-    <div class="stat-card sports-card">
-        <h3>Total Sports</h3>
-        <span>{{ sportsCount }}</span>
+<div class="main-container">
+
+    <h1 class="dashboard-title">Admin Dashboard</h1>
+
+    <div class="stats-container">
+
+        <div class="stat-card sports-card">
+            <h3 class="stat-title">Total Sports</h3>
+            <span class="stat-count">{{ sportsCount }}</span>
+        </div>
+
+        <div class="stat-card venues-card">
+            <h3 class="stat-title">Total Venues</h3>
+            <span class="stat-count">{{ venuesCount }}</span>
+        </div>
+
+        <div class="stat-card users-card">
+            <h3 class="stat-title">Total Users</h3>
+            <span class="stat-count">{{ usersCount }}</span>
+        </div>
+
+        <div class="stat-card bookings-card">
+            <h3 class="stat-title">Total Bookings</h3>
+            <span class="stat-count">{{ bookingsCount }}</span>
+        </div>
+
     </div>
-    <div class="stat-card venues-card">
-        <h3>Total Venues</h3>
-        <span>{{ venuesCount }}</span>
+
+    <section class="admin-info">
+        <h2 class="admin-info-title">Administration Overview</h2>
+
+        <p class="admin-info-text">
+            Welcome to the Sports Booking Administration Portal.
+        </p>
+
+        <p class="admin-info-text">
+            Regular monitoring and timely updates help ensure a seamless experience.
+        </p>
+    </section>
+
+    <div class="cards">
+
+        <div class="card sports" routerLink="manage-sports">
+            <h2 class="card-title">Manage Sports</h2>
+            <p class="card-text">Add, Edit and Delete Sports</p>
+        </div>
+
+        <div class="card venues" routerLink="manage-venues">
+            <h2 class="card-title">Manage Venues</h2>
+            <p class="card-text">Add, Edit and Delete Venues</p>
+        </div>
+
+        <div class="card users" routerLink="manage-users">
+            <h2 class="card-title">Manage Users</h2>
+            <p class="card-text">View Registered Users</p>
+        </div>
+
+        <div class="card bookings" routerLink="manage-bookings">
+            <h2 class="card-title">Manage Bookings</h2>
+            <p class="card-text">View and Update Bookings</p>
+        </div>
+
     </div>
-    <div class="stat-card users-card">
-        <h3>Total Users</h3>
-        <span>{{ usersCount }}</span>
-    </div>
-    <div class="stat-card bookings-card">
-        <h3>Total Bookings</h3>
-        <span>{{ bookingsCount }}</span>
-    </div>
+
+    <button class="back-btn" type="button" routerLink="/home">
+        BackToHome
+    </button>
+
 </div>
-<section class="admin-info">
-    <h2>Administration Overview</h2>
-    <p>
-        Welcome to the Sports Booking Administration Portal.
-    </p>
-    <p>
-        Regular monitoring and timely updates help ensure a seamless experience.
-    </p>
-</section>
-<div class="cards">
-    <div class="card sports" routerLink="manage-sports">
-        <h2>Manage Sports</h2>
-        <p>Add, Edit and Delete Sports</p>
-    </div>
-    <div class="card venues" routerLink="manage-venues">
-        <h2>Manage Venues</h2>
-        <p>Add, Edit and Delete Venues</p>
-    </div>
-    <div class="card users" routerLink="manage-users">
-        <h2>Manage Users</h2>
-        <p>View Registered Users</p>
-    </div>
-    <div class="card bookings" routerLink="manage-bookings">
-        <h2>Manage Bookings</h2>
-        <p>View and Update Bookings</p>
-    </div>
-</div>
-<button id="backbtn" type="button" routerLink="/home"> BackToHome</button>

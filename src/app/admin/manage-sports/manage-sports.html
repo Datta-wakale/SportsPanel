@@ -1,53 +1,90 @@
-<div class="add-sport">
-    <input  type="text" placeholder="Sport Name"
-        [(ngModel)]="newSport.name" />
+<div class="main-container">
 
-    <input type="text" placeholder="Image Path"
-        [(ngModel)]="newSport.image" />
+    <div class="add-sport">
 
-    <button  class="add-btn"  (click)="addSport()">
-        Add Sport
-    </button>
-</div>
-<div class="sports-container">
-    <h1 class="title">
-        Manage Sports
-    </h1>
-    <table class="sports-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Image</th>
-                <th>Sport Name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (sport of sports; track sport.id) {
-            <tr>
-                <td>
-                    {{sport.id}}
-                </td>
-                <td>
-                    <img
-                        class="sport-image"
-                        [src]="sport.image"
-                        [alt]="sport.name" />
-                </td>
-                <td>
-                    {{sport.name}}
-                </td>
-                <td>
-                    <button
-                        class="delete-btn"
-                        (click)="deleteSport(sport.id)">
-                        Delete
-                    </button>
-                </td>
-            </tr>
+        <input
+            class="sport-input"
+            type="text"
+            placeholder="Sport Name"
+            [(ngModel)]="newSport.name" />
 
-            }
-        </tbody>
-    </table>
-    <button id="back" routerLink="../">Back</button>
+        <input
+            class="sport-input"
+            type="text"
+            placeholder="Image Path"
+            [(ngModel)]="newSport.image" />
+
+        <button
+            class="add-btn"
+            (click)="addSport()">
+
+            Add Sport
+
+        </button>
+
+    </div>
+
+    <div class="sports-container">
+
+        <h1 class="title">
+            Manage Sports
+        </h1>
+
+        <table class="sports-table">
+
+            <thead class="sports-table-header">
+
+                <tr class="sports-header-row">
+
+                    <th class="sports-header-cell">ID</th>
+                    <th class="sports-header-cell">Image</th>
+                    <th class="sports-header-cell">Sport Name</th>
+                    <th class="sports-header-cell">Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody class="sports-table-body">
+
+                @for (sport of sports; track sport.id) {
+
+                <tr class="sport-row">
+
+                    <td class="sport-cell">
+                        {{sport.id}}
+                    </td>
+
+                    <td class="sport-cell">
+
+                        <img
+                            class="sport-image"
+                            [src]="sport.image"
+                            [alt]="sport.name" />
+
+                    </td>
+
+                    <td class="sport-cell">
+                        {{sport.name}}
+                    </td>
+
+                    <td class="sport-cell">
+
+                        <button
+                            class="delete-btn"
+                            (click)="deleteSport(sport.id)">
+
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        <button
+            class="back-btn"
+            routerLink="../">
+            Back
+        </button>
+    </div>
 </div>

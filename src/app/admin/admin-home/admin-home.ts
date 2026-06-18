@@ -9,7 +9,7 @@ import { SPORTS } from '../../shared/constants/sports.constants';
   styleUrl: './admin-home.scss',
 })
 export class AdminHome implements OnInit {
-
+  
   sportsCount:number = 0;
   venuesCount:number = 0;
   usersCount:number = 0;

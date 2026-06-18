@@ -1,79 +1,84 @@
 .bookings-container {
     width: 95%;
     margin: 40px auto;
-}
+    margin-top: 90px;
+    .bookings-title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .bookings-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        .bookings-table-header {
+            .bookings-header-row {
+                .bookings-header-cell {
+                    background: #2563eb;
+                    color: white;
+                    padding: 16px;
+                }
+            }
+        }
+        .bookings-table-body {
+            .booking-row {
+                .booking-cell {
+                    padding: 16px;
+                    text-align: center;
+                    border-bottom: 1px solid #ddd;
+                }
 
-.title {
-    text-align: center;
-    margin-bottom: 30px;
-}
+                .status {
+                    color: white;
+                    padding: 8px 15px;
+                    border-radius: 20px;
+                }
 
-.bookings-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-}
+                .upcoming {
+                    background: orange;
+                }
 
-.bookings-table th {
-    background: #2563eb;
-    color: white;
-    padding: 16px;
-}
+                .completed {
+                    background: green;
+                }
 
-.bookings-table td {
-    padding: 16px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+                .cancelled {
+                    background: red;
+                }
 
-}
+                .complete-btn {
+                    background: green;
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 8px;
+                    margin-right: 10px;
+                    cursor: pointer;
+                }
 
-.status {
-    color: white;
-    padding: 8px 15px;
-    border-radius: 20px;
+                .cancel-btn {
+                    background: red;
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                }
 
-}
+            }
+        }
+    }
 
-.upcoming {
-    background: orange;
-}
-
-.completed {
-    background: green;
-}
-
-.cancelled {
-    background: red;
-}
-
-.complete-btn {
-    background: green;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.cancel-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-#back{
-  margin-top: 14px;
-  outline: none;
-  border: none;
-  background: #000;
-  color: white;
-  border-radius: 6px;
-  padding: 8px;
-  cursor: pointer;
-  position: absolute;
-  top: 88px;
-  right: 60px;
+    .back-btn {
+        margin-top: 14px;
+        outline: none;
+        border: none;
+        background: #000;
+        color: white;
+        border-radius: 6px;
+        padding: 8px;
+        cursor: pointer;
+        position: absolute;
+        top: 88px;
+        right: 60px;
+    }
 }
