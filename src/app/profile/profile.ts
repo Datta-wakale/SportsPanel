@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {faUser,faTrophy,faMedal,faStar,faCrown,faFire} from '@fortawesome/free-solid-svg-icons';
-
+import { FormGroup,FormControl,Validators,ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule,RouterLink,FontAwesomeModule],
+  imports: [CommonModule,RouterLink,FontAwesomeModule,ReactiveFormsModule],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })
@@ -100,4 +100,49 @@ export class ProfileComponent implements OnInit {
   goToBookings(): void{
      this.router.navigate(['/mybookings']);
   }
+  isEditMode = false;
+
+updateForm = new FormGroup({
+  name: new FormControl('', [
+    Validators.required,
+    Validators.minLength(2)
+  ]),
+  phone: new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[0-9]{10}$/)
+  ]),
+  email: new FormControl({ value: '', disabled: true }),
+  password: new FormControl({ value: '', disabled: true })
+});
+
+openEditProfile() {
+  this.isEditMode = true;
+
+  this.updateForm.patchValue({
+    name: this.user.name,
+    phone: this.user.phone,
+    email: this.user.email,
+    password: this.user.password 
+  });
+}
+updateProfile(): void {
+  //get users from localStorage
+  const users = JSON.parse( localStorage.getItem('users') || '[]' );
+  const index = users.findIndex( (u: any) => u.email === this.user.email );
+  if (index === -1) return;
+
+  users[index] = {
+    ...users[index],
+    ...this.updateForm.getRawValue()
+  };
+  // set the user in localStorage after updating
+  localStorage.setItem( 'users',JSON.stringify(users));
+  this.user = users[index];
+  this.isEditMode = false;
+}
+// close the update form
+closeEdit(): void{
+  // change the state to close
+  this.isEditMode = false;
+}
 }

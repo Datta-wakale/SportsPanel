@@ -3,6 +3,7 @@
   <!-- Welcome Section -->
   <div class="welcome-card">
     <h1>
+      
       <fa-icon [icon]="faUser"></fa-icon>
       Welcome,
       {{ user?.name || user?.email }}
@@ -10,7 +11,59 @@
     <p>
       Track your sports journey and manage your bookings.
     </p>
+    <button
+  class="edit-profile"
+  (click)="openEditProfile()">
+  Edit Profile
+</button>
   </div>
+  
+@if (isEditMode) {
+
+<form
+  [formGroup]="updateForm"
+  (ngSubmit)="updateProfile()" class="update-form">
+
+  <h2 class="heading">Update Profile</h2>
+  <div class="feilds-container">
+    
+    <label >Name :</label>
+  <input
+    type="text"
+    formControlName="name"
+    placeholder="Name" class="update-form-feilds" />
+  </div>
+  <div class="feilds-container">
+     <label >Phone :</label>
+  <input
+    type="tel"
+    formControlName="phone"
+    placeholder="Phone" class="update-form-feilds"/>
+  </div>
+   <div class="feilds-container">
+       <label >Email :</label>
+  <!-- DISABLED EMAIL -->
+  <input
+    type="email"
+    formControlName="email"
+    readonly class="update-form-feilds"/>
+   </div>
+ <div class="feilds-container">
+    <label >Password :</label>
+  <!-- DISABLED PASSWORD -->
+  <input
+    type="password"
+    formControlName="password"
+    readonly class="update-form-feilds"/>
+ </div>
+ <div class="update-form-btns">
+
+  <button type="button" class="form-btn cancel" (click)="closeEdit()">Cancel</button>
+  <button type="submit" class="form-btn"> Update</button>
+ </div>
+
+</form>
+}
   <!-- Statistics Section -->
   <div class="stats-section">
     <div class="stat-card">
@@ -36,7 +89,7 @@
     <fa-icon [icon]="faTrophy"></fa-icon>
      Achievements
   </h2>
-  <div class="badges-container">
+  <div class="badges-container"> 
     @for (achievement of achievements; track achievement.title) {
       <div class="badge-card" [class]="achievement.class">
         <fa-icon [icon]="achievement.icon"></fa-icon>

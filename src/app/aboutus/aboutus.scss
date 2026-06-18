@@ -1,16 +1,13 @@
 .about-wrapper {
-  width: 100%;
-//   min-height: 100vh;
   background: #d9c3ca;
   padding: 40px;
+  margin-top: 74px;
   box-sizing: border-box;
   overflow: hidden; // no auto scroll
 }
 
 .about-container {
   position: relative;
-  width: 100%;
-//   height: 90vh;
   border-radius: 35px;
   overflow: hidden;
   background-image: url('about-bg.webp');

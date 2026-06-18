@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Headerpart } from "./headerpart/headerpart";
  import { RouterOutlet } from '@angular/router';
 import { Footerpart } from "./footerpart/footerpart";
@@ -10,6 +10,23 @@ import { Footerpart } from "./footerpart/footerpart";
   styleUrl: './app.scss',
   
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('sportsportal');
+
+  ngOnInit(): void {
+    const admin = localStorage.getItem('admin');
+    if(!admin){
+      const encryptedpass = 'admin123'
+      .split('').map(char => char.charCodeAt(0))
+      .join('-')
+
+      localStorage.setItem('admin',JSON.stringify({
+      email: 'admin@gmail.com',
+      password: encryptedpass
+    }))
+    }
+
+   
+
+  }
 }

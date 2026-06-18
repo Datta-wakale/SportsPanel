@@ -1,10 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  ReactiveFormsModule,
-  FormGroup,
-  FormControl,
-  Validators
-} from '@angular/forms';
+import {ReactiveFormsModule,FormGroup,FormControl, Validators} from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NotificationService } from '../services/notification-service';

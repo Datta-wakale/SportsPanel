@@ -39,7 +39,12 @@
 .left-sidebar-menu{
     display: flex;
     gap: 34px;
-    list-style: none;
+    
+
+    li{
+        list-style-type: none;
+        padding: 8px;
+    }
 }
 .left-sidebar-menu li a{
     text-decoration: none;
@@ -47,14 +52,14 @@
     font-size: 18px;
     font-weight: 500;
     transition: 0.3s;
-    padding: 8px;
+   
 }
 
-.left-sidebar-menu li a:hover{
-    color: orange;
+.left-sidebar-menu li:hover {
+     color: orange;
     cursor: pointer;
     border-radius: 6px;
-    box-shadow: 0px 4px 14px #b1a9a9;
+       box-shadow: 0px 2px 6px #b1a9a9;
 }
 
 /* RIGHT BUTTONS */
@@ -117,7 +122,7 @@
   overflow: hidden;
 
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
+  z-index: 1;
 }
 
 .dropdown-header {

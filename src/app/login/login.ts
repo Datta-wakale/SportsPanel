@@ -23,11 +23,7 @@ export class LoginComponent implements OnInit {
   private toastr = inject(ToastrService); // Injected ToastrService
   private dialog = inject(MatDialog);
   private notificationService = inject(NotificationService);
-  private readonly ADMIN_EMAIL =
-  'admin@gmail.com';
 
-private readonly ADMIN_PASSWORD =
-  'admin123';
   // on component load
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -51,66 +47,54 @@ private readonly ADMIN_PASSWORD =
 
   }
 
-  const { email, password } =
-    this.loginForm.value;
+  const { email, password } = this.loginForm.value;
 
-  // ADMIN LOGIN
+const encryptedPassword = password
+  .split('')
+  .map((char: string) => char.charCodeAt(0))
+  .join('-');
 
-  if (
-    email === this.ADMIN_EMAIL &&
-    password === this.ADMIN_PASSWORD
-  ) {
+// ADMIN LOGIN
 
-    this.authService.adminLogin();
+const admin = JSON.parse(
+  localStorage.getItem('admin') || '{}'
+);
 
-    this.toastr.success(
-      'Welcome Admin',
-      'Login Successful'
-    );
+if (
+  email === admin.email &&
+  encryptedPassword === admin.password
+) {
 
-    this.router.navigate(
-      ['/admin-dashboard'],
-      {replaceUrl:true}
-    );
-
-    return;
-
-  }
-
-  // NORMAL USER LOGIN
-
-  const encryptedPassword = password
-    .split('')
-    .map(
-      (char: string) =>
-        char.charCodeAt(0)
-    )
-    .join('-');
-
-  const users = JSON.parse(
-    localStorage.getItem(
-      'users'
-    ) || '[]'
+  this.authService.adminLogin();
+  this.toastr.success('Welcome Admin','Login Successful');
+  this.router.navigate(
+    ['/admin-dashboard'],
+    { replaceUrl : true} // after navigating to admin-dashboard wipe out previous page
   );
 
-  const user = users.find(
-    (u: any) =>
-      u.email === email &&
-      u.password === encryptedPassword
-  );
+  return;
+}
+
+// NORMAL USER LOGIN
+const users = JSON.parse(localStorage.getItem('users') || '[]');
+const user = users.find(
+  (u: any) =>
+    u.email === email &&
+    u.password === encryptedPassword
+);
 
   if (user) {
-
     this.authService.login(user);
     // set Notifications for successfull user
     this.notificationService.setToast('success','Login Successful','Welcome back to the portal!');
     // route to the booking page when successfull login
     this.router.navigate( ['/booking'],
-      { replaceUrl: true});
+    { replaceUrl: true}
+    );
   }
 
   else {
-    this.toastr.error('Invalid email or password.', 'Login Failed' );
+   this.toastr.error('Invalid Email or Password', 'Invalid Credentials');
   }
 
 }
