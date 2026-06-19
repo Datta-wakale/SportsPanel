@@ -1,148 +1,169 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {faUser,faTrophy,faMedal,faStar,faCrown,faFire} from '@fortawesome/free-solid-svg-icons';
-import { FormGroup,FormControl,Validators,ReactiveFormsModule } from '@angular/forms';
+import {faUser, faTrophy, faMedal, faStar, faCrown, faFire} from '@fortawesome/free-solid-svg-icons';
+import {FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialog } from './confirm-dialog/confirm-dialog';
+
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule,RouterLink,FontAwesomeModule,ReactiveFormsModule],
+  imports: [ CommonModule,RouterLink, FontAwesomeModule, ReactiveFormsModule, MatDialogModule],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })
 export class ProfileComponent implements OnInit {
-  // inject router
-   constructor(private router: Router) {}
-   faUser = faUser;
-   faTrophy = faTrophy;
-   faMedal = faMedal;
-   faStar = faStar;
-   faCrown = faCrown;
-   faFire = faFire;
-  // user data
-  user: any = null;
-  // achievements
-   achievements: any[] = [];
-  // data for bookings summary
-  totalBookings = 0;
-  favoriteSport = 'No Favorite Sport Yet';
-  // data for sports summary
-  sports = [
+  // dependecies injecting via constructor
+  constructor(
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
+
+  // fa icons of fontawesome
+  faUser = faUser;
+  faTrophy = faTrophy;
+  faMedal = faMedal;
+  faStar = faStar;
+  faCrown = faCrown;
+  faFire = faFire;
+
+  // signal state
+  user = signal<any>(null);
+  isEditMode = signal(false);
+  sports = signal<any[]>([
     { name: 'Cricket', bookings: 0 },
     { name: 'Football', bookings: 0 },
     { name: 'Badminton', bookings: 0 },
     { name: 'Turf', bookings: 0 }
-  ];
-  // on component load
-  ngOnInit(): void {
-    // get loggedInUser from localStorage
-    this.user = JSON.parse( localStorage.getItem('loggedInUser') || '{}' );
-    const allBookings = JSON.parse( localStorage.getItem('bookings') || '[]' );
-    // filter bookings for that user
-    const userBookings = allBookings.filter(
-      // filter the booking for that user
-      (booking: any) =>
-        booking.userEmail === this.user.email
-    );
-    // total bookings
-    this.totalBookings = userBookings.length;
-    // calculate favorite sport
-    this.sports.forEach(sport => {
-      sport.bookings = userBookings.filter(
-        (booking: any) =>
-          booking.sportName?.trim().toLowerCase() ===
-          sport.name.trim().toLowerCase()
-      ).length;
-    });
-    // find sport with max bookings
-    const maxSport = this.sports.reduce((a, b) =>
+  ]);
+  totalBookings = signal(0);
+  achievements = signal<any[]>([]);
+  // most number of times booked sport
+  favoriteSport = computed(() => {
+    const sports = this.sports();
+    const max = sports.reduce((a, b) =>
       a.bookings > b.bookings ? a : b
     );
-    // if max bookings is 0 then show no bookings yet
-    this.favoriteSport = maxSport.bookings > 0 ? maxSport.name : 'No Favorite Sport Yet';
-     this.loadAchievements();
+    return max.bookings > 0 ? max.name : 'No Favorite Sport Yet';
+  });
+  // how many sports are present
+  activeSports = computed(() =>
+    this.sports().filter(s => s.bookings > 0).length
+  );
+// form
+  updateForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[0-9]{10}$/)
+    ]),
+    email: new FormControl({ value: '', disabled: true }),
+    password: new FormControl({ value: '', disabled: true })
+  });
+  // INIT
+  ngOnInit(): void {
+    const storedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}'); // stored user
+    const allBookings = JSON.parse(localStorage.getItem('bookings') || '[]'); //all bookings
+    const userBookings = allBookings.filter(
+      (b: any) => b.userEmail === storedUser.email
+    );
+    this.user.set(storedUser);
+    this.totalBookings.set(userBookings.length);
+    const updatedSports = this.sports().map(s => ({
+      ...s,
+      bookings: userBookings.filter(
+        (b: any) =>
+          b.sportName?.trim().toLowerCase() === s.name.toLowerCase()
+      ).length
+    }));
+    this.sports.set(updatedSports);
+    this.loadAchievements(); // call loadAchievements function
   }
-  loadAchievements():void {
-    
-    if(this.totalBookings >=5){
-      this.achievements.push({
-        title : "Booking Enthusiast",
-        class : "bronze",
-        icon : faMedal
-      })
+  // provide badges based on how many bookings a user have
+  loadAchievements(): void {
+    const total = this.totalBookings();
+    const sports = this.sports();
+    const list: any[] = [];
+    if (total >= 5) {
+      // push values in achievements array
+      list.push({
+        title: 'Booking Enthusiast',
+        class: 'bronze',
+        icon: faMedal
+      });
     }
-     if (this.totalBookings >= 10) {
-      this.achievements.push({
+
+    if (total >= 10) {
+      list.push({
         title: 'Regular Player',
         class: 'silver',
         icon: faStar
       });
     }
 
-    if (this.totalBookings >= 25) {
-      this.achievements.push({
+    if (total >= 25) {
+      list.push({
         title: 'Champion',
         class: 'gold',
         icon: faCrown
       });
     }
-    const activeSports = this.sports.filter(s => s.bookings > 0).length;
 
-      if(activeSports >= 3){
-        this.achievements.push({
-          title : "Multi-Sport Player",
-          class : "multi",
-          icon : faFire
-        })
+    const active = sports.filter(s => s.bookings > 0).length;
+    if (active >= 3) {
+      list.push({
+        title: 'Multi-Sport Player',
+        class: 'multi',
+        icon: faFire
+      });
+    }
+    this.achievements.set(list);
+  }
+   // NAVIGATION
+  goToBookings(): void {
+    this.router.navigate(['/mybookings']);
+  }
+  // EDIT MODE
+  openEditProfile(): void {
+    this.isEditMode.set(true);
+    const u = this.user();
+    this.updateForm.patchValue({
+      name: u.name,
+      phone: u.phone,
+      email: u.email,
+      password: u.password
+    });
+  }
+// close edit profile when click on cancel button
+  closeEdit(): void {
+    this.isEditMode.set(false);
+  }
+// UPDATE PROFILE
+  updateProfile(): void {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      width: '400px',
+      data: {
+        title: 'Confirm Update',
+        message: 'Are you sure you want to update your information?'
       }
+    });
+  // after dialog box closed
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const current = this.user();
+      const index = users.findIndex((u: any) => u.email === current.email);
+      if (index === -1) return;
+      const updatedUser = {
+        ...users[index],
+        ...this.updateForm.getRawValue()
+      };
+      users[index] = updatedUser;
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+      this.user.set(updatedUser);
+      this.isEditMode.set(false);
+    });
   }
-  // navigate to mybookings page
-  goToBookings(): void{
-     this.router.navigate(['/mybookings']);
-  }
-  isEditMode = false;
-
-updateForm = new FormGroup({
-  name: new FormControl('', [
-    Validators.required,
-    Validators.minLength(2)
-  ]),
-  phone: new FormControl('', [
-    Validators.required,
-    Validators.pattern(/^[0-9]{10}$/)
-  ]),
-  email: new FormControl({ value: '', disabled: true }),
-  password: new FormControl({ value: '', disabled: true })
-});
-
-openEditProfile() {
-  this.isEditMode = true;
-
-  this.updateForm.patchValue({
-    name: this.user.name,
-    phone: this.user.phone,
-    email: this.user.email,
-    password: this.user.password 
-  });
-}
-updateProfile(): void {
-  //get users from localStorage
-  const users = JSON.parse( localStorage.getItem('users') || '[]' );
-  const index = users.findIndex( (u: any) => u.email === this.user.email );
-  if (index === -1) return;
-
-  users[index] = {
-    ...users[index],
-    ...this.updateForm.getRawValue()
-  };
-  // set the user in localStorage after updating
-  localStorage.setItem( 'users',JSON.stringify(users));
-  this.user = users[index];
-  this.isEditMode = false;
-}
-// close the update form
-closeEdit(): void{
-  // change the state to close
-  this.isEditMode = false;
-}
 }

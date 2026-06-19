@@ -6,7 +6,7 @@
       
       <fa-icon [icon]="faUser"></fa-icon>
       Welcome,
-      {{ user?.name || user?.email }}
+      {{ user()?.name || user()?.email }}
     </h1>
     <p>
       Track your sports journey and manage your bookings.
@@ -18,7 +18,7 @@
 </button>
   </div>
   
-@if (isEditMode) {
+@if (isEditMode()) {
 
 <form
   [formGroup]="updateForm"
@@ -67,17 +67,17 @@
   <!-- Statistics Section -->
   <div class="stats-section">
     <div class="stat-card">
-      <h2>{{ totalBookings }}</h2>
+      <h2>{{ totalBookings() }}</h2>
       <p>Total Bookings</p>
     </div>
     <div class="stat-card">
-      <h2>{{ favoriteSport }}</h2>
+      <h2>{{ favoriteSport() }}</h2>
       <p>Frequently Booked Sport</p>
     </div>
 
     <div class="stat-card">
       <h2>
-        {{ sports.filter(s => s.bookings > 0).length }}
+        {{ activeSports() }}
       </h2>
       <p>Active Sports</p>
     </div>
@@ -90,7 +90,7 @@
      Achievements
   </h2>
   <div class="badges-container"> 
-    @for (achievement of achievements; track achievement.title) {
+    @for (achievement of achievements(); track achievement.title) {
       <div class="badge-card" [class]="achievement.class">
         <fa-icon [icon]="achievement.icon"></fa-icon>
         <span>
@@ -103,7 +103,7 @@
 
   <!-- Sports Cards -->
   <div class="sports-section">
-    @for (sport of sports; track sport.name) {
+    @for (sport of sports(); track sport.name) {
       <div class="sport-card">
         <h2>{{ sport.name }}</h2>
         <div class="count">
@@ -114,5 +114,5 @@
       </div>
     }
   </div>
-   <button id="backbtn" type="button" routerLink="/home">BackToHome</button>
+   <button class="backbtn" type="button" routerLink="/home">BackToHome</button>
 </div>

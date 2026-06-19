@@ -12,7 +12,6 @@ import { LogoutConfirmDialog } from '../logout-confirm/logout-confirm';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-
 @Component({
   selector: 'app-headerpart',
   imports: [

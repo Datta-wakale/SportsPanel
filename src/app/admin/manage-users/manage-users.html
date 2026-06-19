@@ -1,34 +1,75 @@
 <div class="users-container">
-    <h1 class="users-title">
-        Manage Users
-    </h1>
-    <table class="users-table">
-        <thead class="users-table-header">
-            <tr class="users-header-row">
-                <th class="users-header-cell">Name</th>
-                <th class="users-header-cell">Email</th>
-                <th class="users-header-cell">Phone</th>
-                <th class="users-header-cell">Action</th>
-            </tr>
-        </thead>
-        <tbody class="users-table-body">
-            @for (user of users; track user.email) {
-            <tr class="user-row">
-                <td class="user-cell">
-                    {{user.name}}
-                </td>
-                <td class="user-cell">
-                    {{user.email}}
-                </td>
-                <td class="user-cell">
-                    {{user.phone}}
-                </td>
-                <td class="user-cell">
-                    <button class="delete-btn"  (click)="deleteUser(user.email)">  Delete  </button>
-                </td>
-            </tr>
+
+  <h1 class="users-title">Manage Users</h1>
+
+  <table class="users-table">
+
+    <thead class="users-table-header">
+      <tr class="users-header-row">
+        <th class="users-header-cell">Name</th>
+        <th class="users-header-cell">Email</th>
+        <th class="users-header-cell">Phone</th>
+        <th class="users-header-cell">Action</th>
+      </tr>
+    </thead>
+
+    <tbody class="users-table-body">
+
+      @for (user of users; track user.value.email; let i = $index) {
+
+        <tr class="user-row" [formGroup]="user">
+
+          <!-- NAME -->
+          <td class="user-cell">
+            @if (!user.value.isEditing) {
+              {{ user.value.name }}
+            } @else {
+              <input formControlName="name">
             }
-        </tbody>
-    </table>
-    <button class="back-btn" routerLink="../"> Back </button>
+          </td>
+
+          <!-- EMAIL -->
+          <td class="user-cell">
+            {{ user.value.email }}
+          </td>
+
+          <!-- PHONE -->
+          <td class="user-cell">
+            @if (!user.value.isEditing) {
+              {{ user.value.phone }}
+            } @else {
+              <input formControlName="phone">
+            }
+          </td>
+
+          <!-- ACTION -->
+          <td class="user-cell">
+
+            <button class="delete-btn"
+                    (click)="deleteUser(i)">
+              Delete
+            </button>
+
+            @if (!user.value.isEditing) {
+              <button class="edit-btn"
+                      (click)="editUser(i)">
+                Edit
+              </button>
+            } @else {
+              <button class="edit-btn"
+                      (click)="saveUser(i)">
+                Save
+              </button>
+            }
+
+          </td>
+
+        </tr>
+
+      }
+    </tbody>
+  </table>
+
+  <button class="back-btn" routerLink="../">Back</button>
+
 </div>

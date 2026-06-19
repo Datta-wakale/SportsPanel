@@ -51,6 +51,19 @@
                         background: #dc2626;
                     }
                 }
+                .edit-btn{
+                    color: white;
+                    border: none;
+                    padding: 10px 18px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    background: #179c4e;
+                    margin-left: 10px;
+
+                    &:hover{
+                        background: #116634;
+                    }
+                }
 
             }
 
