@@ -77,7 +77,8 @@ export class ManageUsersComponent  {
         this.usersForm.value.map((u: any) => ({
           name: u.name,
           email: u.email,
-          phone: u.phone
+          phone: u.phone,
+        
         }))
       )
     );
@@ -93,7 +94,7 @@ export class ManageUsersComponent  {
       disableClose: true,
       data: {
         title: 'Delete User',
-        message: 'Are you sure you want to delete this user?'
+       message : 'are you sure you want to delete this user'
       }
     });
 

@@ -14,7 +14,7 @@ import { PaymentSelection } from './payment-selection/payment-selection';
   styleUrl: './booking.scss'
 })
 export class Booking implements OnInit {
-  user: any = null;
+   user: any = null;
   steps: any[] = [ 'Sport', 'Venue', 'Slot', 'Summary', 'Payment'];
   currentStep:number = 1;
   constructor(
@@ -56,6 +56,12 @@ export class Booking implements OnInit {
 
     }
 
+  }
+  onSportSelected(sport: any):void {
+    console.log("selected sport from child", sport);
+    this.bookingService.selectedSport=sport;
+    this.bookingService.setStep(2);
+    
   }
 
 }

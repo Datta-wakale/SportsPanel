@@ -51,5 +51,4 @@ export class Auth {
   isLoggedIn(): boolean {
     return this.user() !== null || this.isAdmin();
   }
-
 }

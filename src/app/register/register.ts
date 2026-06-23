@@ -146,10 +146,7 @@ export class Register {
     localStorage.setItem('users', JSON.stringify(users));
 
     // SUCCESS TOAST
-    this.toastr.success(
-      'Your account has been created successfully.',
-      'Registration Successful'
-    );
+    this.toastr.success('Your account has been created successfully.','Registration Successful' );
     // RESET FORM
     this.registerForm.reset();
   }
