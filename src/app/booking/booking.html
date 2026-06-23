@@ -30,7 +30,8 @@
 <div class="booking-content">
   @switch (currentStep) {
     @case (1) {
-      <app-sport-selection />
+      <app-sport-selection [user]="user" (sportSelected) = "onSportSelected($event)">
+      </app-sport-selection >
     }
     @case (2) {
       <app-venue-selection />
@@ -45,7 +46,8 @@
       <app-payment-selection />
     }
     @default {
-      <app-sport-selection />
+      <app-sport-selection [user]="user" (sportSelected) ="onSportSelected($event)">
+      </app-sport-selection >
     }
   }
 </div>

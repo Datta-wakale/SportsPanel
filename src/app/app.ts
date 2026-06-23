@@ -25,8 +25,5 @@ export class App implements OnInit {
       password: encryptedpass
     }))
     }
-
-   
-
   }
 }

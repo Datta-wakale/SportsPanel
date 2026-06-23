@@ -72,6 +72,10 @@ if (
 
 // NORMAL USER LOGIN
 const users = JSON.parse(localStorage.getItem('users') || '[]');
+console.log("Entered email:", email);
+console.log("Entered password:", password);
+console.log("Encrypted password:", encryptedPassword);
+console.log("Stored users:", users);
 const user = users.find(
   (u: any) =>
     u.email === email &&
@@ -79,6 +83,9 @@ const user = users.find(
 );
 
   if (user) {
+    console.log(users);
+    console.log(user);
+    console.log(encryptedPassword);
     this.authService.login(user);
     // set Notifications for successfull user
     this.notificationService.setToast('success','Login Successful','Welcome back to the portal!');
