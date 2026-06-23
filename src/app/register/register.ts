@@ -67,13 +67,9 @@ export class Register {
 
   // REGISTER SUBMIT
   onRegister(): void {
-
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
-     this.toastr.warning(
-        'please fill out all the feilds correctly',
-        'Registration Failed'
-      );
+     this.toastr.warning( 'please fill out all the feilds correctly', 'Registration Failed');
       return;
     }
 

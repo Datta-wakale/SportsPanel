@@ -31,20 +31,16 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
-  // onLogin
+  // 
   onLogin(): void {
 
   if (this.loginForm.invalid) {
-
     this.loginForm.markAllAsTouched();
-
     this.toastr.warning(
       'Please fill out all fields correctly.',
       'Validation Error'
     );
-
     return;
-
   }
 
   const { email, password } = this.loginForm.value;
@@ -71,7 +67,6 @@ if (
     ['/admin-dashboard'],
     { replaceUrl : true} // after navigating to admin-dashboard wipe out previous page
   );
-
   return;
 }
 

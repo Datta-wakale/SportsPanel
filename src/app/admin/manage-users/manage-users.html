@@ -16,7 +16,6 @@
     <tbody class="users-table-body">
 
       @for (user of users; track user.value.email; let i = $index) {
-
         <tr class="user-row" [formGroup]="user">
 
           <!-- NAME -->

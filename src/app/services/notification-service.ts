@@ -5,8 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class NotificationService {
 
-  toastData: { type: string; title: string; message: string } | null = null;
-
+  toastData : { type: string; title: string; message: string } | null = null;
   //setting toast 
   setToast(type:string, title: string , message: string): void{
     this.toastData = { type, title , message};
