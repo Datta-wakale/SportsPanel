@@ -54,21 +54,13 @@ export class ManageSportsComponent {
   ref.afterClosed().subscribe(result => {
 
     if (result) { // User clicked Delete
-
       // Remove the sport
       this.sports = this.sports.filter(
         sport => sport.id !== id
       );
-
       // Show success message
-      this.toastr.success(
-        "Sport deleted successfully",
-        "Delete Sport"
-      );
-
+      this.toastr.success( "Sport deleted successfully", "Delete Sport");
     }
-
   });
-
 }
 }

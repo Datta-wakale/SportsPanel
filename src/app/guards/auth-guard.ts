@@ -4,6 +4,7 @@ import { Auth } from '../services/auth';
 
 export const authGuard: CanActivateFn = () => {
 
+  // injecting dependencies via inject
   const auth = inject(Auth);
   const router = inject(Router);
 

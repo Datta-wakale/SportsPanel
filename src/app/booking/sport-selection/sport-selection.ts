@@ -2,6 +2,7 @@ import { Component, input, effect, output} from '@angular/core';
 
 import { SPORTS } from '../../shared/constants/sports.constants';
 import { BookingService } from '../../services/booking.service';
+import { Sport } from '../../shared/interfaces/sport.interface';
 
 @Component({
   selector: 'app-sport-selection',
@@ -29,7 +30,7 @@ user = input<any>(null);
   } */
  sportSelected = output<any>();
 
- selectSport(sport : any): void{
+ selectSport(sport : Sport): void{
     this.sportSelected.emit(sport);
  }
 

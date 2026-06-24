@@ -18,7 +18,6 @@ export class ManageUsersComponent  {
   private fb = inject(FormBuilder);
   private dialog = inject(MatDialog);
   private toastr = inject(ToastrService);
-  private notificationService = inject(NotificationService);
   private cdr = inject(ChangeDetectorRef);
   //Form Array
   usersForm: FormArray = this.fb.array<FormGroup>([]);
@@ -60,6 +59,7 @@ export class ManageUsersComponent  {
       title: 'Edit User',
       message: 'Do you want to edit this user?'
     }
+    
   });
 
  dialogRef.afterClosed().subscribe(result => {
@@ -88,7 +88,6 @@ export class ManageUsersComponent  {
 
   // DELETE user based on index
   deleteUser(index: number): void {
-
     const dialogRef = this.dialog.open(UserDelete, {
       width: '350px',
       disableClose: true,
@@ -110,7 +109,7 @@ export class ManageUsersComponent  {
             }))
           )
         );
-        this.toastr.success('User deleted', 'Success'); // show toastr notifications
+       this.toastr.success("Deleted", "User Deleted Successfully") // user deleted toastr
       }
     });
   }

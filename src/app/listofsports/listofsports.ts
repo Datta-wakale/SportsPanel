@@ -46,18 +46,16 @@ export class ListOfSportsComponent implements OnInit {
         );
         // Find exact sport
        const matchingSports = this.sports.filter(
-  sport =>
-    sport.name
-      .toLowerCase()
-      .includes(searchValue)
+        sport =>
+        sport.name
+        .toLowerCase()
+        .includes(searchValue)
 );
 
 if (matchingSports.length > 0) {
-
   const sportIds = matchingSports.map(
     sport => sport.id
   );
-
   this.filteredVenues = this.venues.filter(
     venue =>
       sportIds.includes(venue.sportId)

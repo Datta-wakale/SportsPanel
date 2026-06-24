@@ -1,8 +1,8 @@
 <div class="users-container">
 
   <h1 class="users-title">Manage Users</h1>
-
-  <table class="users-table">
+  
+  <table class="users-table" >
 
     <thead class="users-table-header">
       <tr class="users-header-row">
@@ -23,7 +23,7 @@
             @if (!user.value.isEditing) {
               {{ user.value.name }}
             } @else {
-              <input formControlName="name">
+              <input formControlName="name" />
             }
           </td>
 
@@ -37,7 +37,7 @@
             @if (!user.value.isEditing) {
               {{ user.value.phone }}
             } @else {
-              <input formControlName="phone">
+              <input formControlName="phone" />
             }
           </td>
 
@@ -56,8 +56,7 @@
               </button>
             } @else {
               <button class="edit-btn"
-                      (click)="saveUser(i)">
-                Save
+                      (click)="saveUser(i)"> Save
               </button>
             }
 
@@ -68,7 +67,5 @@
       }
     </tbody>
   </table>
-
   <button class="back-btn" routerLink="../">Back</button>
-
 </div>

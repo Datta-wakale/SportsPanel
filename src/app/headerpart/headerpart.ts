@@ -44,15 +44,10 @@ export class Headerpart implements OnInit {
         filter(event => event instanceof NavigationEnd)
       )
       .subscribe(() => {
-
         this.showDropdown = false;
-
         const toast = this.notificationService.toastData;
-
         if (!toast) return;
-
         switch (toast.type) {
-
           case 'success':
             this.toastr.success(
               toast.message,
@@ -82,7 +77,7 @@ export class Headerpart implements OnInit {
             break;
 
         }
-
+        // clear the toast
         this.notificationService.clearToast();
 
       });
@@ -104,31 +99,15 @@ export class Headerpart implements OnInit {
         disableClose: true
       }
     );
-
     dialogRef.afterClosed()
       .subscribe(result => {
-
         if (!result) return;
-
-        this.notificationService.setToast(
-          'info',
-          'Logged Out',
-          'You have been logged out successfully'
-        );
-
+        this.notificationService.setToast('info', 'Logged Out','You have been logged out successfully' );
         this.showDropdown = false;
-
         this.authService.logout();
-
-        this.router.navigate(
-          ['/home'],
-          {
-            replaceUrl: true
-          }
+        this.router.navigate( ['/home'],
+          {  replaceUrl: true }
         );
-
       });
-
   }
-
 }
