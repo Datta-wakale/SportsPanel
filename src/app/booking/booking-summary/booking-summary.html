@@ -1,15 +1,47 @@
-
 <h2>Booking Summary</h2>
 
 <div class="summary-card">
 
-    <p> Sport : {{bookingService.selectedSport.name}} </p>
-    <p>Venue : {{bookingService.selectedVenue.name}}</p>
-    <p> Slot : {{bookingService.selectedSlot.from}}  - {{bookingService.selectedSlot.to}} </p>
-    <p> Amount :  ₹{{bookingService.selectedVenue.price}} </p>
-    <button
-        (click)="bookingService.setStep(5)">
-        Proceed To Payment
-    </button>
+  <p>
+    <strong>Sport:</strong>
+    {{ bookingService.selectedSport?.name }}
+  </p>
+
+  <p>
+    <strong>Venue:</strong>
+    {{ bookingService.selectedVenue?.name }}
+  </p>
+
+  <p>
+    <strong>Slot:</strong>
+    {{ bookingService.selectedSlot?.from }}
+    -
+    {{ bookingService.selectedSlot?.to }}
+  </p>
+
+  <p>
+    <strong>Amount:</strong>
+    ₹{{ bookingService.selectedVenue?.price }}
+  </p>
+
+  <hr>
+
+ 
+
+    <div class="weather-card">
+
+      <h3>Weather Advisory</h3>
+
+      <p>Message: [{{ weatherMessage }}]</p>
+<p>Temperature: [{{ temperature }}]</p>
+<p>Length: {{ weatherMessage.length }}</p>
+
+    </div>
+
+
+
+  <button (click)="bookingService.setStep(5)">
+    Proceed To Payment
+  </button>
 
 </div>

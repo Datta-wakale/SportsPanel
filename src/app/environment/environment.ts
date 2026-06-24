@@ -11,8 +11,8 @@ export const environment = {
     register: '/api/register',
     login: '/api/login',
 
-    weather:
-      'https://api.open-meteo.com/v1/forecast'
+   weatherBaseUrl:
+  'https://api.open-meteo.com/v1/forecast'
   }
 
 };

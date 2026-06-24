@@ -5,4 +5,7 @@ export interface Venue {
   location: string;
   price: number;
   image: string;
+
+  latitude?: number;
+  longitude?: number;
 }
