@@ -20,8 +20,7 @@ interface User {
 export class Register {
 
   private toastr = inject(ToastrService);
-  private notificationService = inject(NotificationService);
-
+ 
   passwordMismatch = false;
 
   // Reactive Form
@@ -127,7 +126,6 @@ export class Register {
       );
       return;
     }
-
     // ADD USER
     const newUser: User = {
       name: formValue.name,
@@ -140,7 +138,6 @@ export class Register {
 
     // SAVE USERS
     localStorage.setItem('users', JSON.stringify(users));
-
     // SUCCESS TOAST
     this.toastr.success('Your account has been created successfully.','Registration Successful' );
     // RESET FORM

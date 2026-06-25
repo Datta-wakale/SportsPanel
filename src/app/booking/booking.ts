@@ -61,7 +61,6 @@ export class Booking implements OnInit {
     console.log("selected sport from child", sport);
     this.bookingService.selectedSport=sport;
     this.bookingService.setStep(2);
-    
+  
   }
-
 }

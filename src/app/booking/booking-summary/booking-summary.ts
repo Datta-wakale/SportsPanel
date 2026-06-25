@@ -1,7 +1,8 @@
-import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../services/booking.service';
 import { WeatherService } from '../../services/weather.service';
+import { UserLocationService } from '../../services/userlocation-service';
 
 @Component({
   selector: 'app-booking-summary',
@@ -12,83 +13,158 @@ import { WeatherService } from '../../services/weather.service';
 })
 export class BookingSummary implements OnInit {
 
-  weatherData: any = null;
-  weatherMessage = '';
-  temperature: number = 0;
+  // Message for the user 
+  venueWeatherMessage = '';
+  userWeatherMessage = '';
+  // get location & venue
+  userLocationName = '';
+  venueName = '';
+
   constructor(
     public bookingService: BookingService,
     private weatherService: WeatherService,
-    private cdr : ChangeDetectorRef
-  ) {
+    private userLocation: UserLocationService,
+    private cdr: ChangeDetectorRef
+  ) { }
+
+  //  VENUE WEATHER (SPORT LOGIC)
+
+  private getVenueWeatherMessage(
+    weatherCode: number,
+    sportType: string,
+    temperature: number
+  ): string {
+
+    const isOutdoor = sportType === 'Outdoor';
+
+    if (weatherCode === 0) {
+      return isOutdoor
+        ? `☀️ Excellent weather for outdoor play. Enjoy your game! (${temperature}°C)`
+        : `☀️ Pleasant weather. Indoor game scheduled normally. (${temperature}°C)`;
+    }
+
+    if ([1, 2, 3].includes(weatherCode)) {
+      return isOutdoor
+        ? `⛅ Comfortable weather for outdoor sports. (${temperature}°C)`
+        : `⛅ Good weather for travel. Indoor play unaffected. (${temperature}°C)`;
+    }
+
+    if ([61, 63, 65, 80, 81, 82, 91, 92].includes(weatherCode)) {
+      return isOutdoor
+        ? `🌧️ Rain expected. Outdoor play may be affected. Consider rescheduling. (${temperature}°C)`
+        : `🌧️ Rain expected. Indoor play safe, but reach 20 min early due to traffic delays. (${temperature}°C)`;
+    }
+
+    if ([95, 96, 99].includes(weatherCode)) {
+      return isOutdoor
+        ? `⛈️ Thunderstorm risk is high. Outdoor play is not recommended. Consider rescheduling. (${temperature}°C)`
+        : `⛈️ Thunderstorm conditions expected. Indoor play can continue, but travel disruptions are possible. (${temperature}°C)`;
+    }
+
+    return `🌤️ Weather update available. (${temperature}°C)`;
   }
 
-  ngOnInit(): void {
+  //  USER WEATHER (TRAVEL LOGIC)
+  private getUserWeatherMessage(
+    weatherCode: number,
+    temperature: number
+  ): string {
+    // based on code give the message
+    if (weatherCode === 0) {
+      return `☀️ Clear weather near your location. Good time to travel. (${temperature}°C)`;
+    }
 
-    console.log('Component Loaded');
+    if ([1, 2, 3].includes(weatherCode)) {
+      return `⛅ Mild weather near your location. You can travel comfortably. (${temperature}°C)`;
+    }
 
+    if ([61, 63, 65, 80, 81, 82, 91, 92].includes(weatherCode)) {
+      return `🌧️ Rain expected near your location. Consider leaving early or delaying travel for safety. (${temperature}°C)`;
+    }
+    if ([95, 96, 99].includes(weatherCode)) {
+  return `⛈️ Severe thunderstorm alert near your location. Avoid travel if possible. (${temperature}°C)`;
+}
+    return `🌤️ Weather update available for your location. (${temperature}°C)`;
+  }
+
+  //  MAIN FLOW
+  async ngOnInit(): Promise<void> {
     const venue = this.bookingService.selectedVenue;
     const sport = this.bookingService.selectedSport;
+    const selectedDate = this.bookingService.selectedSlot?.date;
+    if (!venue || !sport || !selectedDate) return;
+    this.venueName = this.formatVenueName(venue);
+    const sportType = sport.type;
 
-    console.log('Venue =>', venue);
-    console.log('Sport =>', sport);
+    try {
 
-    if (!venue || !sport) {
-      this.weatherMessage = 'Missing booking data';
-      return;
-    }
-console.log('Before API Call');
-    this.weatherService
-      .getCurrentWeather(venue.latitude, venue.longitude)
-      .subscribe({
-       next: (response: any) => {
-this.weatherMessage = 'cloudy mmm';
-  this.weatherData = response;
-    this.temperature = response.current.temperature_2m;
-  const weatherCode = response.current.weather_code;
-   console.log('temperature =', this.temperature);
-  console.log('message =', this.weatherMessage);
+      // 1. GET USER LOCATION FIRST
+      const position = await this.userLocation.getUserLocation();
+      const userLat = position.coords.latitude;
+      const userLon = position.coords.longitude;
+      // 2. NOW CALL LOCATION NAME (FIXED)
+      this.userLocationName = await this.userLocation.getLocationName(userLat, userLon);
+      // 3. WEATHER API
+      this.weatherService.getWeatherForecast(userLat, userLon)
+        .subscribe({
+          next: (res: any) => {
+            const index = res.daily.time.indexOf(selectedDate);
+            if (index === -1) {
+              this.userWeatherMessage =
+                'Weather forecast not available for selected date.';
+              return;
+            }
+            const code = res.daily.weather_code[index];
+            const temp = Math.round(
+              (
+                res.daily.temperature_2m_max[index] +
+                res.daily.temperature_2m_min[index]
+              ) / 2
+            );
+            console.log('USER CODE:', code);
+            this.userWeatherMessage = this.getUserWeatherMessage(code, temp);
+            this.cdr.detectChanges();
+          },
+          error: () => {
+            this.userWeatherMessage =
+              'Unable to fetch user location weather.';
+          }
+        });
 
-
-  switch (weatherCode) {
-
-    case 0:
-      this.weatherMessage = `☀️ Sunny - ${this.temperature}°C`;
-      break;
-
-    case 1:
-    case 2:
-      this.weatherMessage = `⛅ Partly Cloudy - ${this.temperature}°C`;
-      break;
-
-    case 3:
-      this.weatherMessage = `☁️ Cloudy - ${this.temperature}°C`;
-      break;
-
-    case 61:
-    case 63:
-    case 65:
-      this.weatherMessage = `🌧️ Rainy - ${this.temperature}°C`;
-      break;
-
-    case 95:
-      this.weatherMessage = `⛈️ Thunderstorm - ${this.temperature}°C`;
-      break;
-
-    default:
-      this.weatherMessage = `🌤️ Weather Available - ${this.temperature}°C`;
-  }
-  this.cdr.detectChanges();
-
-  console.log('Weather Message =>', this.weatherMessage);
-},
-        error: (err) => {
-
-          console.error('Weather API Error =>', err);
-
-          this.weatherMessage =
-            'Unable to fetch weather information.';
+      // 4. VENUE WEATHER
+      this.weatherService.getWeatherForecast(
+        venue.latitude,
+        venue.longitude
+      ).subscribe({
+        next: (res: any) => {
+          const index = res.daily.time.indexOf(selectedDate);
+          if (index === -1) {
+            this.venueWeatherMessage =
+              'Weather forecast not available for selected date.';
+            return;
+          }
+          const code = res.daily.weather_code[index];
+          const temp = Math.round(
+            (
+              res.daily.temperature_2m_max[index] +
+              res.daily.temperature_2m_min[index]
+            ) / 2
+          );
+          console.log('VENUE  CODE:', code);
+          this.venueWeatherMessage = this.getVenueWeatherMessage(code, sportType, temp);
+          // detect the changes
+          this.cdr.detectChanges();
         }
       });
-      console.log('After Subscribe');
+
+    } catch (err) {
+      this.userWeatherMessage =
+        'Location access denied. Enable location to see travel advisory.';
+    }
+  }
+  // for venue location
+  private formatVenueName(venue: any): string {
+    if (!venue) return '';
+    return `${venue.name} (${venue.location})`;
   }
 }

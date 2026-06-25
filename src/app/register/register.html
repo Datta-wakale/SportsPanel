@@ -1,20 +1,14 @@
 <div class="register-page-bg">
-
     <div class="register-card">
-
         <form [formGroup]="registerForm"
               class="register-form"
               (ngSubmit)="onRegister()">
-
             <h2>Create Account</h2>
-
             <div class="input-group">
                 <label>Name</label>
-
                 <input type="text"
                        formControlName="name"
                        placeholder="Enter Name">
-
                 <span class="error-text">
                     @if(registerForm.controls.name.invalid &&
                     registerForm.controls.name.touched) {
@@ -22,16 +16,13 @@
                     }
                 </span>
             </div>
-
             <div class="input-group">
                 <label>Phone</label>
-
                 <input type="tel"
                        formControlName="phone"
                        maxlength="10"
                        (keypress)="onlyNumbers($event)"
                        placeholder="Enter Phone Number">
-
                 <span class="error-text">
                     @if(registerForm.controls.phone.invalid &&
                     registerForm.controls.phone.touched) {
@@ -39,14 +30,11 @@
                     }
                 </span>
             </div>
-
             <div class="input-group">
                 <label>Email</label>
-
                 <input type="email"
                        formControlName="email"
                        placeholder="Enter Email">
-
                 <span class="error-text">
                     @if(registerForm.controls.email.invalid &&
                     registerForm.controls.email.touched) {
@@ -54,14 +42,11 @@
                     }
                 </span>
             </div>
-
             <div class="input-group">
                 <label>Password</label>
-
                 <input type="password"
                        formControlName="password"
                        placeholder="Enter Password">
-
                 <span class="error-text">
                     @if(registerForm.controls.password.invalid &&
                     registerForm.controls.password.touched) {
@@ -69,42 +54,33 @@
                     }
                 </span>
             </div>
-
             <div class="input-group">
                 <label>Confirm Password</label>
-
                 <input type="password"
                        formControlName="confirmpassword"
                        placeholder="Confirm Password">
-
                 <span class="error-text">
                     @if(registerForm.controls.confirmpassword.invalid &&
                     registerForm.controls.confirmpassword.touched) {
                         Confirm Password is Required
                     }
-
                     @if(passwordMismatch &&
                     registerForm.controls.confirmpassword.touched) {
                         Password does not match
                     }
                 </span>
             </div>
-
             <button class="register-submit-btn"
                     type="submit"
                     [disabled]="registerForm.invalid || passwordMismatch">
                 Register
             </button>
-
             <button class="home-btn"
                     type="button"
                     routerLink="/home">
                 Back To Home
             </button>
-
         </form>
-
     </div>
-
 </div>
 

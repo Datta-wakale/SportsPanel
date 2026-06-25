@@ -35,7 +35,7 @@ export const routes: Routes = [
      canActivate: [adminGuard],
      children: [
       { path: '', component: AdminHome },
-      {path: 'manage-sports', component: ManageSportsComponent},
+      { path: 'manage-sports', component: ManageSportsComponent},
       { path: 'manage-users',component: ManageUsersComponent},
       { path: 'manage-venues', component: ManageVenuesComponent},
       { path: 'manage-bookings', component : ManageBookings}

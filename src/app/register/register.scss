@@ -4,12 +4,11 @@
 //   min-height: calc(100vh - 80px); /* 80px header height */
   padding: 90px 20px 20px; /* top padding for header + bottom spacing */
   box-sizing: border-box;
-height: 560px;
+  height: 560px;
   background-image: url("./registerbackimage.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -63,13 +62,10 @@ height: 560px;
   width: 100%;
   height: 34px; /* smaller height */
   padding: 0 10px;
-
   border-radius: 6px; /* slightly smaller radius */
   border: 1px solid #4b5563;
-
   color: #000;
   outline: none;
-
   transition: 0.3s ease;
 }
 
@@ -127,11 +123,9 @@ height: 560px;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   z-index: 9999;
 }
 

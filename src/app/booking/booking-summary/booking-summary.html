@@ -1,47 +1,49 @@
-<h2>Booking Summary</h2>
 
+<div class="page-wrapper">
 <div class="summary-card">
-
+  <h2 class="title">Booking Summary</h2>
   <p>
     <strong>Sport:</strong>
     {{ bookingService.selectedSport?.name }}
   </p>
-
   <p>
     <strong>Venue:</strong>
     {{ bookingService.selectedVenue?.name }}
   </p>
-
   <p>
     <strong>Slot:</strong>
     {{ bookingService.selectedSlot?.from }}
     -
     {{ bookingService.selectedSlot?.to }}
   </p>
-
   <p>
     <strong>Amount:</strong>
     ₹{{ bookingService.selectedVenue?.price }}
   </p>
-
-  <hr>
-
- 
-
-    <div class="weather-card">
-
-      <h3>Weather Advisory</h3>
-
-      <p>Message: [{{ weatherMessage }}]</p>
-<p>Temperature: [{{ temperature }}]</p>
-<p>Length: {{ weatherMessage.length }}</p>
-
-    </div>
-
-
-
-  <button (click)="bookingService.setStep(5)">
+  <p>
+    <strong>Booking Date</strong>
+     {{ bookingService.selectedSlot?.date}} 
+  </p>
+  <hr />
+  <!--  WEATHER SECTION -->
+  
+  <button (click)="bookingService.setStep(5)" class="payment-btn">
     Proceed To Payment
   </button>
-
 </div>
+<div class="weather-card">
+    <h3>Weather Advisory</h3>
+    <!--  USER LOCATION WEATHER -->
+    <div class="weather-section user-weather">
+      <h4>📍 {{userLocationName}}</h4>
+      <p>{{ userWeatherMessage }}</p>
+    </div>
+    <hr />
+    <!--  VENUE WEATHER -->
+    <div class="weather-section venue-weather">
+      <h4>🏟️ {{venueName}}</h4>
+      <p>{{ venueWeatherMessage }}</p>
+    </div>
+    
+  </div>
+  </div>

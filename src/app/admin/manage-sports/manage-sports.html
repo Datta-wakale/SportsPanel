@@ -1,79 +1,53 @@
 <div class="main-container">
-
     <div class="add-sport">
-
         <input
             class="sport-input"
             type="text"
             placeholder="Sport Name"
             [(ngModel)]="newSport.name" />
-
         <input
             class="sport-input"
             type="text"
             placeholder="Image Path"
             [(ngModel)]="newSport.image" />
-
         <button
             class="add-btn"
             (click)="addSport()">
-
             Add Sport
-
         </button>
-
     </div>
-
     <div class="sports-container">
-
         <h1 class="title">
             Manage Sports
         </h1>
-
         <table class="sports-table">
-
             <thead class="sports-table-header">
-
                 <tr class="sports-header-row">
-
-                    <th class="sports-header-cell">ID</th>
+                   <th class="sports-header-cell">ID</th>
                     <th class="sports-header-cell">Image</th>
                     <th class="sports-header-cell">Sport Name</th>
                     <th class="sports-header-cell">Action</th>
-
                 </tr>
-
             </thead>
-
             <tbody class="sports-table-body">
-
                 @for (sport of sports; track sport.id) {
-
                 <tr class="sport-row">
-
                     <td class="sport-cell">
                         {{sport.id}}
                     </td>
-
                     <td class="sport-cell">
-
                         <img
                             class="sport-image"
                             [src]="sport.image"
                             [alt]="sport.name" />
-
                     </td>
-
                     <td class="sport-cell">
                         {{sport.name}}
                     </td>
-
                     <td class="sport-cell">
-
                         <button
                             class="delete-btn"
                             (click)="deleteSport(sport.id)">
-
                             Delete
                         </button>
                     </td>
@@ -81,10 +55,6 @@
                 }
             </tbody>
         </table>
-        <button
-            class="back-btn"
-            routerLink="../">
-            Back
-        </button>
+        <button class="back-btn" routerLink="../"> Back </button>
     </div>
 </div>

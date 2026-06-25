@@ -34,46 +34,40 @@ export class LoginComponent implements OnInit {
   // 
   onLogin(): void {
 
-  if (this.loginForm.invalid) {
+    if (this.loginForm.invalid) {
 
-    this.loginForm.markAllAsTouched();
+      this.loginForm.markAllAsTouched();
 
-    this.toastr.warning(
-      'Please fill out all fields correctly.',
-      'Validation Error'
-    );
-
-    return;
-
-  }
-
+      this.toastr.warning(
+        'Please fill out all fields correctly.',
+        'Validation Error'
+      );
+      return;
+    }
     const { email, password } = this.loginForm.value;
-
     const encryptedPassword = password
       .split('')
       .map((char: string) => char.charCodeAt(0))
       .join('-');
 
     // ADMIN LOGIN
-
     const admin = JSON.parse(
       localStorage.getItem('admin') || '{}'
     );
-
     if (
       email === admin.email &&
       encryptedPassword === admin.password
     ) {
 
-  this.authService.adminLogin();
-  this.toastr.success('Welcome Admin','Login Successful');
-  this.router.navigate(
-    ['/admin-dashboard'],
-    { replaceUrl : true} // after navigating to admin-dashboard wipe out previous page
-  );
+      this.authService.adminLogin();
+      this.toastr.success('Welcome Admin', 'Login Successful');
+      this.router.navigate(
+        ['/admin-dashboard'],
+        { replaceUrl: true } // after navigating to admin-dashboard wipe out previous page
+      );
 
-  return;
-}
+      return;
+    }
 
     // NORMAL USER LOGIN
     const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -81,6 +75,7 @@ export class LoginComponent implements OnInit {
     console.log("Entered password:", password);
     console.log("Encrypted password:", encryptedPassword);
     console.log("Stored users:", users);
+    // find users
     const user = users.find(
       (u: any) =>
         u.email === email &&
