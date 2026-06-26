@@ -133,9 +133,8 @@ export class Register {
       email: formValue.email,
       password: encryptedPassword
     };
-
+    // pushing new user on array
     users.push(newUser);
-
     // SAVE USERS
     localStorage.setItem('users', JSON.stringify(users));
     // SUCCESS TOAST
@@ -144,10 +143,9 @@ export class Register {
     this.registerForm.reset();
   }
 
-  // ONLY NUMBERS ALLOWED
+  // only numbers allowed 
   onlyNumbers(event: KeyboardEvent): void {
     const charCode = event.keyCode || event.which;
-
     if (charCode < 48 || charCode > 57) {
       event.preventDefault();
     }

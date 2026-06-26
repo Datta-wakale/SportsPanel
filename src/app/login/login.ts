@@ -14,7 +14,7 @@ import { NotificationService } from '../services/notification-service';
   templateUrl: './login.html',
   styleUrls: ['./login.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
   loginForm!: FormGroup;
   // Injected services inject 
   private fb = inject(FormBuilder);
@@ -28,20 +28,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
   // 
   onLogin(): void {
 
     if (this.loginForm.invalid) {
-
       this.loginForm.markAllAsTouched();
-
-      this.toastr.warning(
-        'Please fill out all fields correctly.',
-        'Validation Error'
-      );
+      this.toastr.warning( 'Please fill out all fields correctly.','Validation Error');
       return;
     }
     const { email, password } = this.loginForm.value;
@@ -54,10 +49,7 @@ export class LoginComponent implements OnInit {
     const admin = JSON.parse(
       localStorage.getItem('admin') || '{}'
     );
-    if (
-      email === admin.email &&
-      encryptedPassword === admin.password
-    ) {
+    if ( email === admin.email && encryptedPassword === admin.password) {
 
       this.authService.adminLogin();
       this.toastr.success('Welcome Admin', 'Login Successful');
@@ -81,7 +73,6 @@ export class LoginComponent implements OnInit {
         u.email === email &&
         u.password === encryptedPassword
     );
-
     if (user) {
       console.log(users);
       console.log(user);
@@ -97,7 +88,6 @@ export class LoginComponent implements OnInit {
     else {
       this.toastr.error('Invalid Email or Password', 'Invalid Credentials'); //invalid credentials
     }
-
   }
   // open pop up for forgetpassword
   openForgotPassword(): void {

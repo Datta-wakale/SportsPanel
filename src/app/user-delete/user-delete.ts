@@ -14,5 +14,4 @@ export class UserDelete {
     public dialogRef: MatDialogRef<UserDelete>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-
 }

@@ -10,7 +10,7 @@ import { Footerpart } from "./footerpart/footerpart";
   styleUrl: './app.scss',
   
 })
-export class App implements OnInit {
+export class App {
   protected readonly title = signal('sportsportal');
 
   ngOnInit(): void {

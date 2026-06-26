@@ -21,7 +21,6 @@ export class ManageUsersComponent  {
   private cdr = inject(ChangeDetectorRef);
   //Form Array
   usersForm: FormArray = this.fb.array<FormGroup>([]);
-
   // load the user loading component
   ngOnInit(): void {
     // call load users
@@ -32,7 +31,7 @@ export class ManageUsersComponent  {
     // get values as a FormGroup
     return this.usersForm.controls as FormGroup[];
   }
-  // LOAD users function
+  // Load the users
   loadUsers(): void {
     // get the users form localStorage if not present return empty array
     const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -49,17 +48,16 @@ export class ManageUsersComponent  {
       );
     });
   }
-
   //  edit the user based on Index
  editUser(index: number): void {
   const dialogRef = this.dialog.open(UserDelete, {
     width: '350px',
+    //if click outside then pop will not gone
     disableClose: true,
     data: {
       title: 'Edit User',
       message: 'Do you want to edit this user?'
     }
-    
   });
 
  dialogRef.afterClosed().subscribe(result => {
@@ -78,11 +76,9 @@ export class ManageUsersComponent  {
           name: u.name,
           email: u.email,
           phone: u.phone,
-        
         }))
       )
     );
-
     this.toastr.success('User updated', 'Success');
   }
 
